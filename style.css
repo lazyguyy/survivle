@@ -1,6 +1,6 @@
 .notifications {
     min-height: 7vmin;
-    font-size: 6vmin;
+    font-size: 5vmin;
 }
 
 .board {
@@ -45,7 +45,7 @@
 
 .keyboard button {
     display:  inline-flex;
-    padding: 5vh 4vw 5vh 4vw;
+    padding: 4vh 3vw 4vh 3vw;
     width: 4vw;
     height: 5vh;
     margin: 0.5vmin;
