@@ -131,22 +131,6 @@ function updateBoard(board, word) {
     }
 }
 
-function load_file(filename) {
-    let relative_path = "./data/" + filename
-    fetch(relative_path).then(
-        function(answer) {
-            if (answer.status != 200) {
-                console.log("request failed")
-                return
-            }
-            answer.json().then(function(content) {
-                console.log(content)
-            })
-        }).catch(function(err) {
-            console.log("fetch error ", err)
-        })
-}
-
 function make_keyboard(react_function) {
     keyboard = document.getElementById("keyboard")
     for (let r = 0; r < keyboard_buttons.length; ++r) {
@@ -172,7 +156,7 @@ function submitWord(board, word, hints) {
         return
     }
 
-    if (!(valid_words.has(word.toLowerCase()) || target_words.has(word.toLowerCase()))) {
+    if (!valid_words.has(word.toLowerCase())) {
         notifications.textContent = `${word.toUpperCase()} is not in the word list.`
         return
     }
