@@ -102,6 +102,7 @@ window.onload = function() {
             row.children[i].className = ["gray", "yellow", "green"][score[i]]
         }
         createNewRow()
+        board.scrollTop = board.scrollHeight
         word = ""
     }
 

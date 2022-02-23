@@ -1,5 +1,5 @@
 .notifications {
-    min-height: 5vh;
+    min-height: 4vh;
     font-size: 3vh;
 }
 
@@ -8,6 +8,7 @@
     display: inline-block;
     padding-top: 0px;
     height: 65vh;
+    overflow-y: auto;
 }
 
 .board td {
@@ -39,15 +40,16 @@
 .game-area {
     display: inline-block;
     text-align: center;
+    padding-left: calc(100vw - 100%);
 }
 
 .keyboard button {
     display:  inline-flex;
-    padding: 3vmin;
-    width: 2vmin;
-    height: 2vmin;
+    padding: 4vmin;
+    width: 4vmin;
+    height: 4vmin;
     margin: 0.5vmin;
     justify-content: center;
     align-items: center;
-    font-size: 3vmin;
+    font-size: 4vmin;
 }
