@@ -43,12 +43,16 @@
     padding-right: -calc(100vw - 100%);
 }
 
+.keyboard {
+    height:  30vh;
+}
+
 .keyboard button {
     display:  inline-flex;
-    padding: 4vh 3vw 4vh 3vw;
-    width: 4vw;
+    padding: 4vh 2.5vw 4vh 2.5vw;
+    width: 3vw;
     height: 5vh;
-    margin: 0.5vmin;
+    margin: 0.3vmin;
     justify-content: center;
     align-items: center;
     font-size: 4vmin;

@@ -167,10 +167,10 @@ function submitWord(board, word, hints) {
         return
     }
 
-    // if (!valid_words.has(word.toLowerCase())) {
-    //     notifications.textContent = `${word} is not in the word list.`
-    //     return
-    // }
+    if (!valid_words.has(word.toLowerCase())) {
+        notifications.textContent = `${word.toUpperCase()} is not in the word list.`
+        return
+    }
 
     if (!uses_info(word, hints)) {
         return
