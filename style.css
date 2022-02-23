@@ -53,11 +53,11 @@ button {
 
 .keyboard button {
     display:  inline-flex;
-    padding: 5vh 4vw 5vh 4vw;
+    padding: 4vh 4.1vw 4vh 4.1vw;
     width: 4vw;
-    height: 5vh;
+    height: 4vh;
     margin: 0.3vmin;
     justify-content: center;
     align-items: center;
-    font-size: 4vmin;
+    font-size: 6vmin;
 }
