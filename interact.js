@@ -75,13 +75,16 @@ function updateHints(word, score, hints) {
         switch (score[i]){
             case 0:
                 uncontained_letters.add(word[i])
+                document.getElementById(word[i]).className = "gray"
                 break
             case 1:
                 hints.blocked_positions[i].add(word[i])
+                document.getElementById(word[i]).className = "yellow"
                 counts[word[i]]++
                 break
             case 2:
                 hints.fixed_positions[i] = word[i]
+                document.getElementById(word[i]).className = "green"
                 counts[word[i]]++
         }
     }
@@ -154,6 +157,7 @@ function make_keyboard(react_function) {
             let btn = document.createElement("button")
             btn.onclick = () => react_function(keyboard_commands[r][c])
             btn.textContent = keyboard_buttons[r][c]
+            btn.id = keyboard_commands[r][c]
             row.appendChild(btn)
         }
     }

@@ -19,16 +19,20 @@
     text-align: center;
     font-size: 6vmin;
 }
-.board .gray {
+.gray {
     background-color: lightslategray;
 }
 
-.board .yellow {
+.yellow {
     background-color: lightyellow;
 }
 
-.board .green {
+.green {
     background-color: palegreen;
+}
+
+button {
+    border-width: 0px;
 }
 
 .game {
@@ -49,8 +53,8 @@
 
 .keyboard button {
     display:  inline-flex;
-    padding: 4vh 2.5vw 4vh 2.5vw;
-    width: 3.5vw;
+    padding: 5vh 4vw 5vh 4vw;
+    width: 4vw;
     height: 5vh;
     margin: 0.3vmin;
     justify-content: center;
