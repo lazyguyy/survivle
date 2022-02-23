@@ -1,25 +1,23 @@
-.board {
-    border-spacing: 10px;
-    display: inline-block;
-    padding: 5vh;
-    padding-top: 0px;
-    width: 47%;
-    height: 65vh;
-}
-
 .notifications {
     min-height: 5vh;
     font-size: 3vh;
+}
+
+.board {
+    border-spacing: 0.8vmin;
+    display: inline-block;
+    padding-top: 0px;
+    height: 65vh;
 }
 
 .board td {
     border-style: solid;
     border-width: 1px;
     border-color: black;
-    height: 7vh;
-    width: 7vh;
+    height: 8vmin;
+    width: 8vmin;
     text-align: center;
-    font-size: 5vh;
+    font-size: 6vmin;
 }
 .board .gray {
     background-color: lightslategray;
@@ -45,11 +43,11 @@
 
 .keyboard button {
     display:  inline-flex;
-    padding: 3vh;
-    width: 2vh;
-    height: 2vh;
-    margin: 0.5vh;
+    padding: 3vmin;
+    width: 2vmin;
+    height: 2vmin;
+    margin: 0.5vmin;
     justify-content: center;
     align-items: center;
-    font-size: 3vh;
+    font-size: 3vmin;
 }
