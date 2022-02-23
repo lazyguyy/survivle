@@ -50,10 +50,10 @@
 .keyboard button {
     display:  inline-flex;
     padding: 4vh 2.5vw 4vh 2.5vw;
-    width: 3vw;
+    width: 3.5vw;
     height: 5vh;
     margin: 0.3vmin;
     justify-content: center;
     align-items: center;
-    font-size: 3vw;
+    font-size: 4vmin;
 }
