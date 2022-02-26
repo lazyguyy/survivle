@@ -70,7 +70,7 @@ function uses_info(word, hints){
             return false
         }
         if (hints.gray_letters.has(letter) && letter_counts[letter] > hints.letter_counts[letter]) {
-            if (letter_counts[letter] == 0) {
+            if (hints.letter_counts[letter] == 0) {
                 notifications.textContent = `The word does not contain the letter ${letter.toUpperCase()}.`
 
             } else {
