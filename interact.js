@@ -12,6 +12,15 @@ class DefaultDict {
   }
 }
 
+numbers = ["zero", "one", "two", "three", "four", "five"]
+ordinals = ["", "first", "second", "third", "fourth", "fifth"]
+
+function numerus(count, singular, plural) {
+    if (count == 1)
+        return numbers[count] + " " + singular
+    return numbers[count] + " " + plural
+}
+
 
 let keyboard_buttons = [["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
                         ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
@@ -37,31 +46,36 @@ hints.fixed_positions = {}
 // index -> {letter1, letter2, ...}
 hints.blocked_positions = new DefaultDict(() => new Set())
 // letter -> count
-hints.contained_letters = new DefaultDict(() => 0)
+hints.letter_counts = new DefaultDict(() => 0)
 // {letter1, letter2, ...}
-hints.uncontained_letters = new Set()
+hints.gray_letters = new Set()
 
 
 function uses_info(word, hints){
-    contained_letters = new DefaultDict(() => 0)
+    letter_counts = new DefaultDict(() => 0)
     for (let i = 0; i < word.length; ++i) {
+        letter_counts[word[i]]++
         if (i in hints.fixed_positions && word[i] != hints.fixed_positions[i]) {
-            notifications.textContent = `Letter ${i + 1} must be ${hints.fixed_positions[i].toUpperCase()}`
+            notifications.textContent = `The ${ordinals[i + 1]} letter must be ${hints.fixed_positions[i].toUpperCase()}.`
             return false
         }
         if (hints.blocked_positions[i].has(word[i])) {
-            notifications.textContent = `Letter ${i + 1} cannot be ${word[i].toUpperCase()}`
-            return false
-        }
-        contained_letters[word[i]]++
-        if (hints.uncontained_letters.has(word[i])) {
-            notifications.textContent = `The word must not contain ${word[i].toUpperCase()}`
+            notifications.textContent = `The ${ordinals[i + 1]} letter cannot be ${word[i].toUpperCase()}.`
             return false
         }
     }
-    for (const letter of Object.keys(hints.contained_letters)) {
-        if (hints.contained_letters[letter] > contained_letters[letter]) {
-            notifications.textContent = `The word must contain more of the letter ${letter.toUpperCase()}`
+    for (const letter of Object.keys(hints.letter_counts)) {
+        if (hints.letter_counts[letter] > letter_counts[letter]) {
+            notifications.textContent = `The word contains the letter ${letter.toUpperCase()} ${hints.gray_letters.has(letter) ? "exactly" : "at least"} ${numerus(hints.letter_counts[letter], "time", "times")}.`
+            return false
+        }
+        if (hints.gray_letters.has(letter) && letter_counts[letter] > hints.letter_counts[letter]) {
+            if (letter_counts[letter] == 0) {
+                notifications.textContent = `The word does not contain the letter ${letter.toUpperCase()}.`
+
+            } else {
+                notifications.textContent = `The word contains the letter ${letter.toUpperCase()} only ${numerus(hints.letter_counts[letter], "time", "times")}.`
+            }
             return false
         }
     }
@@ -70,33 +84,35 @@ function uses_info(word, hints){
 
 function updateHints(word, score, hints) {
     counts = new DefaultDict(() => 0)
-    uncontained_letters = new Set()
+    gray_letters = new Set()
     for (let i = 0; i < word.length; ++i) {
+        button = document.getElementById(word[i])
         switch (score[i]){
             case 0:
-                uncontained_letters.add(word[i])
-                document.getElementById(word[i]).className = "gray"
+                gray_letters.add(word[i])
+                if (button.className == "")
+                    button.className = "gray"
                 break
             case 1:
                 hints.blocked_positions[i].add(word[i])
-                document.getElementById(word[i]).className = "yellow"
+                if (button.className != "green")
+                    button.className = "yellow"
                 counts[word[i]]++
                 break
             case 2:
                 hints.fixed_positions[i] = word[i]
-                document.getElementById(word[i]).className = "green"
+                button.className = "green"
                 counts[word[i]]++
         }
     }
-    for (const key of Object.keys(counts)) {
-        if (counts[key] > hints.contained_letters[key]) {
-            hints.contained_letters[key] = counts[key]
+    for (const letter of Object.keys(counts)) {
+        if (counts[letter] > hints.letter_counts[letter]) {
+            hints.letter_counts[letter] = counts[letter]
         }
     }
-    for (const key of uncontained_letters) {
-        if (!(key in counts)) {
-            hints.uncontained_letters.add(key)
-        }
+    for (const letter of gray_letters) {
+        hints.gray_letters.add(letter)
+        hints.letter_counts[letter] = counts[letter]
     }
 }
 
