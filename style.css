@@ -11,21 +11,19 @@ body {
 }
 
 .titlebar {
-    height: 50px;
+    height: 6vmin;
     overflow: hidden;
 }
 
 .notifications {
     display: inline-flex;
-    height: 5vmin;
+    height: 6vmin;
     font-size: 5vmin;
     width: 80vw;
     overflow: hidden;
     contain: strict;
     justify-content: center;
 }
-
-
 
 .board {
     border-spacing: 0.8vmin;
@@ -109,7 +107,8 @@ body {
     border: none;
     width: 4vmin;
     height: 4vmin;
-
+    margin: 0;
+    padding: 0;
 }
 
 #toggle-darkmode {
@@ -128,7 +127,7 @@ body {
 }
 
 #restart {
-    background: url( dark-mode.svg );
+    background: url( reload.svg );
     background-size: cover;
 }
 

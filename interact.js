@@ -35,20 +35,13 @@ let valid_words = new Set(["aahed","aalii","aargh","aarti","abaca","abaci","abac
 target_words.forEach(valid_words.add, valid_words)
 let notifications = document.getElementById("notifications")
 let game_area = document.getElementById("game-area")
-let target_word = target_words[Math.floor(Math.random() * target_words.length)]
-let target_length = target_word.length
+let board = document.getElementById("board")
+let target_word;
+let target_length;
 let entered_word = ""
 let solved = false
 
 let hints = Object()
-// index -> letter
-hints.fixed_positions = {}
-// index -> {letter1, letter2, ...}
-hints.blocked_positions = new DefaultDict(() => new Set())
-// letter -> count
-hints.letter_counts = new DefaultDict(() => 0)
-// {letter1, letter2, ...}
-hints.gray_letters = new Set()
 
 
 function uses_info(word, hints){
@@ -116,6 +109,40 @@ function updateHints(word, score, hints) {
     }
 }
 
+function showSolution() {
+    entered_word = target_word
+    updateBoard(board, target_word)
+    submitWord(board, target_word, hints)
+    document.getElementById("reveal").blur()
+}
+
+function newGame() {
+    target_word = target_words[Math.floor(Math.random() * target_words.length)]
+    target_length = target_word.length
+    entered_word = ""
+    solved = false
+    board.innerHTML = ""
+    createNewRow(board, target_length)
+
+    for (const className of ["gray", "yellow", "green"]) {
+        colored_buttons = document.getElementsByClassName(className)
+        for (let i = colored_buttons.length - 1; i >= 0; --i) {
+            colored_buttons[i].classList.toggle(className)
+        }
+
+    }
+
+    // index -> letter
+    hints.fixed_positions = {}
+    // index -> {letter1, letter2, ...}
+    hints.blocked_positions = new DefaultDict(() => new Set())
+    // letter -> count
+    hints.letter_counts = new DefaultDict(() => 0)
+    // {letter1, letter2, ...}
+    hints.gray_letters = new Set()
+    document.getElementById("restart").blur()
+}
+
 function computeScore(target, entered) {
     n = target.length
     counts = new DefaultDict(() => 0)
@@ -165,20 +192,20 @@ function make_keyboard(react_function) {
 
 function submitWord(board, word, hints) {
     if (solved)
-        return
+        return false
     target_length = board.rows[0].children.length
     if (word.length < target_length) {
         notifications.textContent = `Word must have ${target_length} letters.`
-        return
+        return false
     }
 
     if (!valid_words.has(word.toLowerCase())) {
         notifications.textContent = `${word.toUpperCase()} is not in the word list.`
-        return
+        return false
     }
 
     if (!uses_info(word, hints)) {
-        return
+        return false
     }
 
     score = computeScore(target_word, word)
@@ -188,17 +215,17 @@ function submitWord(board, word, hints) {
         row.children[i].className = ["gray", "yellow", "green"][score[i]]
     }
     if (score.every(x => x == 2)) {
-        notifications.textContent = `You managed to hold out for ${board.rows.length} rounds. Congratulations!`
+        notifications.textContent = `You survived for ${board.rows.length} rounds. Congratulations!`
         solved = true
-        return
+        return false
     }
     createNewRow(board)
     game_area.scrollTop = game_area.scrollHeight
-    entered_word = ""
+    return true
 }
 
 function createNewRow(board, length) {
-    if (!length > 0) {
+    if (!(length > 0)) {
         length = board.rows[0].children.length
     }
     row = board.insertRow(board.rows.length)
@@ -214,7 +241,9 @@ function react(key) {
     }
 
     if (key == "Enter") {
-        submitWord(board, entered_word, hints)
+        if (submitWord(board, entered_word, hints)) {
+            entered_word = ""
+        }
         return
     }
     if (entered_word.length < 5 && key.length == 1 && (/[a-zA-Z]/).test(key)) {
@@ -224,15 +253,25 @@ function react(key) {
     }
 }
 
+function toggleDarkmode() {
+    document.body.classList.toggle("darkmode")
+    for (const e of document.getElementsByClassName("option-button"))
+        e.classList.toggle("inverted")
+    document.getElementById("toggle-darkmode").blur()
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-    createNewRow(board, target_length)
     window.addEventListener("keydown", event => react(event.key))
     make_keyboard(react)
     document.getElementById("toggle-darkmode").onclick = () => {
-      document.body.classList.toggle("darkmode")
-      for (const e of document.getElementsByClassName("option-button"))
-        e.classList.toggle("inverted")
-      document.getElementById("toggle-darkmode").blur()
+        toggleDarkmode()
+        localStorage.setItem("darkmode", document.body.classList.contains("darkmode"))
+    }
+    document.getElementById("reveal").onclick = showSolution
+    document.getElementById("restart").onclick = newGame
+    newGame()
+    if (localStorage.getItem("darkmode") == "true") {
+        toggleDarkmode()
     }
 })
 // })()
