@@ -7,12 +7,16 @@ body {
     color: white;
     border-color: white;
     border: none;
-    margin: 0;
 }
 
 .titlebar {
     height: 6vmin;
+    width: 100vw;
     overflow: hidden;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    font-size: 0;
 }
 
 .notifications {
@@ -29,7 +33,6 @@ body {
     border-spacing: 0.8vmin;
     display: inline-block;
     padding-top: 0px;
-    height: 60vh;
 }
 
 .board td {
@@ -50,7 +53,7 @@ body {
 }
 
 .yellow {
-    background-color: lightyellow;
+    background-color: #ffc40c;
 }
 
 .green {
@@ -71,7 +74,8 @@ body {
 
 .game {
     text-align: center;
-    width: 100%;
+    width: 100vw;
+    height: 100vh;
 }
 
 .game-area {
@@ -79,6 +83,7 @@ body {
     text-align: center;
     overflow-y: auto;
     padding-right: -calc(100vw - 100%);
+    height: 60vh;
 }
 
 .keyboard {
@@ -86,7 +91,9 @@ body {
 }
 
 .keyboard button {
-    border-width: 0px;
+    border-width: 1px;
+    border-color: white;
+    border-style: solid;
     display:  inline-flex;
     padding: 4vh 4.1vw 4vh 4.1vw;
     width: 4vw;
@@ -99,8 +106,21 @@ body {
 
 .darkmode .keyboard button {
     border-width: 1px;
+    border-color: white;
     color: white;
     background-color: #1A1A1A;
+}
+
+.darkmode .keyboard .gray {
+    background-color: slategray;
+}
+
+.darkmode .keyboard .yellow {
+    background-color: orange;
+}
+
+.darkmode .keyboard .green {
+    background-color: forestgreen;
 }
 
 .option-button {
@@ -133,4 +153,35 @@ body {
 
 .inverted {
     filter: invert(1);
+}
+
+.overlay {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    background-color: white;
+    font-size: 5vh;
+    align-items: center;
+    align-content: center;
+}
+
+.darkmode .overlay {
+    background-color: #1A1A1A;
+}
+
+.overlay-content {
+    display:  inline-block;
+    position: relative;
+    width: 80%;
+    text-align: center;
+    padding: 5% 10% 0 10%;
+    margin-top: 30px;
+}
+
+.darkmode .overlay-content {
+    background-color: #1A1A1A;
 }

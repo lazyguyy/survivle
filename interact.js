@@ -1,4 +1,4 @@
-// (() => {
+(() => {
 class DefaultDict {
   constructor(defaultVal) {
     return new Proxy({}, {
@@ -260,6 +260,14 @@ function toggleDarkmode() {
     document.getElementById("toggle-darkmode").blur()
 }
 
+function showHelp() {
+    document.getElementById("help-overlay").style.width = "100%"
+}
+
+function hideHelp() {
+    document.getElementById("help-overlay").style.width = "0%"
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("keydown", event => react(event.key))
     make_keyboard(react)
@@ -267,11 +275,9 @@ document.addEventListener("DOMContentLoaded", () => {
         toggleDarkmode()
         localStorage.setItem("darkmode", document.body.classList.contains("darkmode"))
     }
-    document.getElementById("reveal").onclick = showSolution
-    document.getElementById("restart").onclick = newGame
-    newGame()
     if (localStorage.getItem("darkmode") == "true") {
         toggleDarkmode()
     }
+    newGame()
 })
-// })()
+})()
