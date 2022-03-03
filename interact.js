@@ -1,4 +1,3 @@
-(() => {
 class DefaultDict {
   constructor(defaultVal) {
     return new Proxy({}, {
@@ -280,4 +279,3 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     newGame()
 })
-})()
