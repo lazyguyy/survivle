@@ -6,11 +6,14 @@
     <link rel="stylesheet" href="style.css">
     <title>Survivle</title>
 </head>
-<body class="darkmode">
+<body>
 <div class="game">
     <div id="titlebar">
+        <button id="help" class="option-button" title="Show Help" type="button"></button>
+        <button id="restart" class="option-button" title="New Survivle" type="button"></button>
         <div class="notifications" id="notifications"></div>
-        <button id="toggle-darkmode">D</button>
+        <button id="toggle-darkmode" class="option-button" title="Toggle Darkmode" type="button"></button>
+        <button id="reveal" class="option-button" title="Show Solution" type="button"></button>
     </div>
     <div class="game-area" id="game-area">
         <table class="board" id="board"></table>

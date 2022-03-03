@@ -1,3 +1,7 @@
+body {
+    margin: 0;
+}
+
 .darkmode {
     background-color: #1A1A1A;
     color: white;
@@ -99,4 +103,35 @@
     border-width: 1px;
     color: white;
     background-color: #1A1A1A;
+}
+
+.option-button {
+    border: none;
+    width: 4vmin;
+    height: 4vmin;
+
+}
+
+#toggle-darkmode {
+    background: url( dark-mode.svg );
+    background-size: cover;
+}
+
+#reveal {
+    background: url( reveal.svg );
+    background-size: cover;
+}
+
+#help {
+    background: url( help.svg );
+    background-size: cover;
+}
+
+#restart {
+    background: url( dark-mode.svg );
+    background-size: cover;
+}
+
+.inverted {
+    filter: invert(1);
 }

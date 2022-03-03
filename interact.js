@@ -228,5 +228,11 @@ document.addEventListener("DOMContentLoaded", () => {
     createNewRow(board, target_length)
     window.addEventListener("keydown", event => react(event.key))
     make_keyboard(react)
+    document.getElementById("toggle-darkmode").onclick = () => {
+      document.body.classList.toggle("darkmode")
+      for (const e of document.getElementsByClassName("option-button"))
+        e.classList.toggle("inverted")
+      document.getElementById("toggle-darkmode").blur()
+    }
 })
 // })()
