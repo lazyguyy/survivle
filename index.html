@@ -6,15 +6,16 @@
     <link rel="stylesheet" href="style.css">
     <title>Survivle</title>
 </head>
-<body>
+<body class="darkmode">
 <div class="game">
-    <div class="notifications" id="notifications">
+    <div id="titlebar">
+        <div class="notifications" id="notifications"></div>
+        <button id="toggle-darkmode">D</button>
     </div>
     <div class="game-area" id="game-area">
-    <table class="board" id="board"></table>
-    </div>
-    <div class="keyboard" id="keyboard">
-    </div>
+        <table class="board" id="board"></table>
+        </div>
+    <div class="keyboard" id="keyboard"></div>
 </div>
 <script language="javascript" src="interact.js"></script>
 </body>

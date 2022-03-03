@@ -224,10 +224,9 @@ function react(key) {
     }
 }
 
-window.onload = function() {
-
+document.addEventListener("DOMContentLoaded", () => {
     createNewRow(board, target_length)
     window.addEventListener("keydown", event => react(event.key))
     make_keyboard(react)
-}
+})
 // })()

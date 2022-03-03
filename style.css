@@ -1,7 +1,27 @@
-.notifications {
-    min-height: 7vmin;
-    font-size: 5vmin;
+.darkmode {
+    background-color: #1A1A1A;
+    color: white;
+    border-color: white;
+    border: none;
+    margin: 0;
 }
+
+.titlebar {
+    height: 50px;
+    overflow: hidden;
+}
+
+.notifications {
+    display: inline-flex;
+    height: 5vmin;
+    font-size: 5vmin;
+    width: 80vw;
+    overflow: hidden;
+    contain: strict;
+    justify-content: center;
+}
+
+
 
 .board {
     border-spacing: 0.8vmin;
@@ -13,12 +33,16 @@
 .board td {
     border-style: solid;
     border-width: 1px;
-    border-color: black;
     height: 8vmin;
     width: 8vmin;
     text-align: center;
     font-size: 6vmin;
 }
+
+.darkmode .board td {
+    color: white;
+}
+
 .gray {
     background-color: lightslategray;
 }
@@ -31,8 +55,16 @@
     background-color: palegreen;
 }
 
-button {
-    border-width: 0px;
+.darkmode .gray {
+    background-color: slategray;
+}
+
+.darkmode .yellow {
+    background-color: orange;
+}
+
+.darkmode .green {
+    background-color: forestgreen;
 }
 
 .game {
@@ -52,6 +84,7 @@ button {
 }
 
 .keyboard button {
+    border-width: 0px;
     display:  inline-flex;
     padding: 4vh 4.1vw 4vh 4.1vw;
     width: 4vw;
@@ -60,4 +93,10 @@ button {
     justify-content: center;
     align-items: center;
     font-size: 6vmin;
+}
+
+.darkmode .keyboard button {
+    border-width: 1px;
+    color: white;
+    background-color: #1A1A1A;
 }
