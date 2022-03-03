@@ -139,6 +139,7 @@ function newGame() {
     hints.letter_counts = new DefaultDict(() => 0)
     // {letter1, letter2, ...}
     hints.gray_letters = new Set()
+    notifications.textContent = ""
     document.getElementById("restart").blur()
 }
 
