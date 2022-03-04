@@ -32,7 +32,7 @@ body {
     display: inline-flex;
     height: 6vh;
     font-size: 3vmin;
-    width: min(calc(100% - 2*var(--game-cell-width)), 80vw);
+    width: min(calc(100vw - 2*var(--game-cell-width)), 80vw);
     overflow: hidden;
     contain: strict;
     justify-content: center;
@@ -96,7 +96,7 @@ body {
     text-align: center;
     overflow-y: auto;
     padding-right: -calc(100vw - 100%);
-    height: calc(100% - 5vh - 4 * var(--key-height));
+    height: calc(100% - 10vh - 4 * var(--key-height));
 }
 
 .keyboard {
@@ -111,7 +111,7 @@ body {
     padding: 0.8em 0.7em;
     width: var(--key-width);
     height: var(--key-height);
-    margin: 0.2vh 0.2vw;
+    margin: 0.05em;
     justify-content: center;
     align-items: center;
     font-size: min(3.5vh, 6vw);
@@ -121,7 +121,7 @@ body {
     border-width: 1px;
     border-color: white;
     color: white;
-    background-color: var(--darkmode-background);
+    background-color: #222222;
 }
 
 .darkmode .keyboard .gray {
