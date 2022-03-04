@@ -6,9 +6,10 @@
     --key-height: 7vh;
 }
 
-body {
+html, body {
     margin: 0;
     font-family: Verdana, sans-serif;
+    height: 100%;
 }
 
 .darkmode {
