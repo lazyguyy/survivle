@@ -96,7 +96,7 @@ body {
     text-align: center;
     overflow-y: auto;
     padding-right: -calc(100vw - 100%);
-    height: calc(95vh - 3.8 * var(--key-height));
+    height: calc(95vh - 4 * var(--key-height));
 }
 
 .keyboard {
