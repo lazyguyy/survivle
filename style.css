@@ -10,6 +10,7 @@ html, body {
     margin: 0;
     font-family: Verdana, sans-serif;
     height: 100%;
+    touch-action: manipulation;
 }
 
 .darkmode {
