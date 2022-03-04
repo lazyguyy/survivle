@@ -108,13 +108,13 @@ body {
     border-color: white;
     border-style: solid;
     display:  inline-flex;
-    padding: 0.8em;
+    padding: 0.8em 0.7em;
     width: var(--key-width);
     height: var(--key-height);
-    margin: 0.3vh 0.2vw;
+    margin: 0.2vh 0.2vw;
     justify-content: center;
     align-items: center;
-    font-size: 5vmin;
+    font-size: 3.5vh;
 }
 
 .darkmode .keyboard button {
