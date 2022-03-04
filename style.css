@@ -3,7 +3,7 @@
     --game-cell-width: min(13vmin, 8vh);
     --game-cell-fontsize: min(11vmin, 6vh);
     --key-width: min(4vw, 3.5vh);
-    --key-height: 6vh;
+    --key-height: 7vh;
 }
 
 body {
@@ -96,7 +96,7 @@ body {
     text-align: center;
     overflow-y: auto;
     padding-right: -calc(100vw - 100%);
-    height: calc(8 * var(--game-cell-width));
+    height: calc(95vh - 3 * var(--key-height) - 3em);
 }
 
 .keyboard {
