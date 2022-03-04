@@ -30,7 +30,7 @@ body {
 
 .notifications-wrapper {
     display: inline-flex;
-    height: calc(4vmin + 2vh);
+    height: 6vh;
     font-size: 3vmin;
     width: min(calc(100% - 2*var(--game-cell-width)), 80vw);
     overflow: hidden;
@@ -96,7 +96,7 @@ body {
     text-align: center;
     overflow-y: auto;
     padding-right: -calc(100vw - 100%);
-    height: calc(95vh - 3 * var(--key-height) - 3em);
+    height: calc(95vh - 3.8 * var(--key-height));
 }
 
 .keyboard {
@@ -114,7 +114,7 @@ body {
     margin: 0.2vh 0.2vw;
     justify-content: center;
     align-items: center;
-    font-size: 3.5vh;
+    font-size: min(3.5vh, 6vw);
 }
 
 .darkmode .keyboard button {
