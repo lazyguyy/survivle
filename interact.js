@@ -52,7 +52,7 @@ function uses_info(word, hints){
             return false
         }
         if (hints.blocked_positions[i].has(word[i])) {
-            notifications.textContent = `The ${ordinals[i + 1]} letter cannot be ${word[i].toUpperCase()}.`
+            notifications.textContent = `The ${ordinals[i + 1]} letter is not ${word[i].toUpperCase()}.`
             return false
         }
     }
@@ -63,10 +63,10 @@ function uses_info(word, hints){
         }
         if (hints.gray_letters.has(letter) && letter_counts[letter] > hints.letter_counts[letter]) {
             if (hints.letter_counts[letter] == 0) {
-                notifications.textContent = `The word does not contain the letter ${letter.toUpperCase()}.`
+                notifications.textContent = `The word does not contain ${letter.toUpperCase()}.`
 
             } else {
-                notifications.textContent = `The word contains the letter ${letter.toUpperCase()} only ${numerus(hints.letter_counts[letter], "time", "times")}.`
+                notifications.textContent = `The word contains ${letter.toUpperCase()} only ${numerus(hints.letter_counts[letter], "time", "times")}.`
             }
             return false
         }
@@ -82,6 +82,7 @@ function updateHints(word, score, hints) {
         switch (score[i]){
             case 0:
                 gray_letters.add(word[i])
+                hints.blocked_positions[i].add(word[i])
                 if (button.className == "")
                     button.className = "gray"
                 break
