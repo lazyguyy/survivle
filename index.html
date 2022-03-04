@@ -11,11 +11,9 @@
     <div class="overlay-content" onclick="hideHelp()">
         This is yet another creation inspired by Josh Wardle's very popular <a href="https://www.powerlanguage.co.uk/wordle/">Wordle</a>.<br><br>
 
-        But in contrast to the original, the goal is to make as <b>many</b> wrong guesses as possible. In order to make the game somewhat challenging, all revealed information must be used. <br><br>
+        The game plays just like the original in a (even stricter) hardmode: <b>All</b> revealed information has to be used. However, the goal now is to take as many <b>wrong</b> guesses as possible.<br><br>
 
-        This is like Wordle hardmode, only even more restrictive (because the original Wordle does not force you to make use of all available information).<br><br>
-
-        Since it is very easy to accidentally ignore information, the game will let you know what exactly (if anything) is wrong with your current guess. <br><br>
+        Since it is very easy to lose track of the revealed information, the game will let you know what exactly (if anything) is wrong with your current guess. <br><br>
 
         Good Luck!
     </div>
@@ -24,7 +22,7 @@
     <div id="titlebar">
         <button id="help" class="option-button" title="Show Help" onclick="showHelp()"></button><!--
         --><button id="restart" class="option-button" title="New Survivle" onclick="newGame()"></button><!--
-        --><div class="notifications" id="notifications"></div><!--
+        --><div class="notifications-wrapper" ><div class="notifications-text" id="notifications"></div></div><!--
         --><button id="reveal" class="option-button" title="Show Solution" onclick="showSolution()"></button><!--
         --><button id="toggle-darkmode" class="option-button" title="Toggle Darkmode"></button>
     </div>

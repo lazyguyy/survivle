@@ -58,15 +58,15 @@ function uses_info(word, hints){
     }
     for (const letter of Object.keys(hints.letter_counts)) {
         if (hints.letter_counts[letter] > letter_counts[letter]) {
-            notifications.textContent = `The word contains the letter ${letter.toUpperCase()} ${hints.gray_letters.has(letter) ? "exactly" : "at least"} ${numerus(hints.letter_counts[letter], "time", "times")}.`
+            notifications.textContent = `${letter.toUpperCase()} is contained ${hints.gray_letters.has(letter) ? "exactly" : "at least"} ${numerus(hints.letter_counts[letter], "time", "times")}.`
             return false
         }
         if (hints.gray_letters.has(letter) && letter_counts[letter] > hints.letter_counts[letter]) {
             if (hints.letter_counts[letter] == 0) {
-                notifications.textContent = `The word does not contain ${letter.toUpperCase()}.`
+                notifications.textContent = `${letter.toUpperCase()} is not contained.`
 
             } else {
-                notifications.textContent = `The word contains ${letter.toUpperCase()} only ${numerus(hints.letter_counts[letter], "time", "times")}.`
+                notifications.textContent = `${letter.toUpperCase()} is contained only ${numerus(hints.letter_counts[letter], "time", "times")}.`
             }
             return false
         }
@@ -216,7 +216,7 @@ function submitWord(board, word, hints) {
         row.children[i].className = ["gray", "yellow", "green"][score[i]]
     }
     if (score.every(x => x == 2)) {
-        notifications.textContent = `You survived for ${board.rows.length} rounds. Congratulations!`
+        notifications.textContent = `You survived for ${board.rows.length} rounds.`
         solved = true
         return false
     }
