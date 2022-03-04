@@ -3,7 +3,7 @@
     --game-cell-width: min(13vmin, 8vh);
     --game-cell-fontsize: min(11vmin, 6vh);
     --key-width: min(4vw, 3.5vh);
-    --key-height: 3.5vh;
+    --key-height: 6vh;
 }
 
 body {
@@ -32,7 +32,7 @@ body {
     display: inline-flex;
     height: calc(4vmin + 2vh);
     font-size: 3vmin;
-    width: 75vw;
+    width: min(calc(100% - 2*var(--game-cell-width)), 80vw);
     overflow: hidden;
     contain: strict;
     justify-content: center;
@@ -138,8 +138,8 @@ body {
 
 .option-button {
     border: none;
-    width: calc(2*var(--game-cell-width)/3);
-    height: calc(2*var(--game-cell-width)/3);
+    width: calc(2*var(--game-cell-width)/5);
+    height: calc(2*var(--game-cell-width)/5);
     margin: 0;
     margin-top: 1vh;
     padding: 0;
