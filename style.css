@@ -2,6 +2,8 @@
     --darkmode-background: #1a1a1a;
     --game-cell-width: min(13vmin, 8vh);
     --game-cell-fontsize: min(11vmin, 6vh);
+    --key-width: min(4vw, 3.5vh);
+    --key-height: 3.5vh;
 }
 
 body {
@@ -17,7 +19,7 @@ body {
 }
 
 .titlebar {
-    height: 6vmin;
+    height: 6vh;
     width: 100vw;
     overflow: hidden;
     justify-content: center;
@@ -98,7 +100,7 @@ body {
 }
 
 .keyboard {
-    max-height:  30vh;
+    vertical-align: bottom;
 }
 
 .keyboard button {
@@ -106,13 +108,13 @@ body {
     border-color: white;
     border-style: solid;
     display:  inline-flex;
-    padding: 3.8vh 4.1vw 3.8vh 4.1vw;
-    width: 4vw;
-    height: 3.8vh;
-    margin: 0.3vmin;
+    padding: 0.8em;
+    width: var(--key-width);
+    height: var(--key-height);
+    margin: 0.3vh 0.2vw;
     justify-content: center;
     align-items: center;
-    font-size: 6vmin;
+    font-size: 5vmin;
 }
 
 .darkmode .keyboard button {
@@ -136,8 +138,8 @@ body {
 
 .option-button {
     border: none;
-    width: 2.5vmax;
-    height: 2.5vmax;
+    width: calc(2*var(--game-cell-width)/3);
+    height: calc(2*var(--game-cell-width)/3);
     margin: 0;
     margin-top: 1vh;
     padding: 0;
