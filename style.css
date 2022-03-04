@@ -1,7 +1,7 @@
 :root {
     --darkmode-background: #1a1a1a;
     --game-cell-width: min(13vmin, 8vh);
-    --game-cell-fontsize: min(11vmin, 6vh);
+    --game-cell-fontsize: min(10.5vmin, 5.5vh);
     --key-width: min(4vw, 3.5vh);
     --key-height: 7vh;
 }
@@ -109,6 +109,7 @@ html, body {
     border-width: 1px;
     border-color: white;
     border-style: solid;
+    color: black;
     display:  inline-flex;
     padding: 0.8em 0.7em;
     width: var(--key-width);
@@ -149,22 +150,22 @@ html, body {
 }
 
 #toggle-darkmode {
-    background: url( dark-mode.svg );
+    background: url( assets/dark-mode.svg );
     background-size: cover;
 }
 
 #reveal {
-    background: url( reveal.svg );
+    background: url( assets/reveal.svg );
     background-size: cover;
 }
 
 #help {
-    background: url( help.svg );
+    background: url( assets/help.svg );
     background-size: cover;
 }
 
 #restart {
-    background: url( reload.svg );
+    background: url( assets/reload.svg );
     background-size: cover;
 }
 
