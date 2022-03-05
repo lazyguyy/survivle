@@ -197,12 +197,12 @@ function submitWord(board, word, hints) {
         return false
     }
 
-    if (!valid_words.has(word.toLowerCase())) {
-        notifications.textContent = `${word.toUpperCase()} is not in the word list.`
+    if (!uses_info(word, hints)) {
         return false
     }
 
-    if (!uses_info(word, hints)) {
+    if (!valid_words.has(word.toLowerCase())) {
+        notifications.textContent = `${word.toUpperCase()} is not in the word list.`
         return false
     }
 
