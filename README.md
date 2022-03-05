@@ -1,6 +1,6 @@
 # Survivle
 
-Inspired by Josh Wardle's fantastic (and very popular) [Wordle](https://www.powerlanguage.co.uk/wordle/), I decided to add yet another spin-off to the fast and ever growing world of Wordle derivatives.
+Inspired by Josh Wardle's fantastic (and very popular) [Wordle](https://www.powerlanguage.co.uk/wordle/) and qntm's [Absurdle](https://qntm.org/files/absurdle/absurdle.html), I decided to add yet another spin-off to the fast and ever growing world of Wordle derivatives.
 The goal in Survivle is, opposite to the original, to take as many guesses as possible before entering the secret word.
 
 
