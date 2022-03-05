@@ -110,10 +110,7 @@ function updateHints(word, score, hints) {
 }
 
 function showSolution() {
-    entered_word = target_word
-    updateBoard(board, target_word)
-    submitWord(board, target_word, hints)
-    document.getElementById("reveal").blur()
+  notifications.textContent = `The secret word is ${target_word.toUpperCase()}.`
 }
 
 function newGame() {
