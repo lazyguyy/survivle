@@ -277,6 +277,7 @@ function checkDailyProgress() {
   if (last_date == undefined || (new Date(last_date)).toDateString() != (new Date()).toDateString()) {
     localStorage.setItem("entered_words", "")
   }
+  localStorage.setItem("last_date", (new Date()).toDateString())
   for (const word of localStorage.getItem("entered_words").split(",")) {
     if (word == "") continue
     console.log(`Submitting ${word} from cache`)
@@ -287,9 +288,13 @@ function checkDailyProgress() {
     for (var i = 0; i < target_word.length; ++i) {
         row.children[i].className = ["gray", "yellow", "green"][score[i]]
     }
+    if (score.every(x => x == 2)) {
+        notifications.textContent = `You survived for ${board.rows.length} rounds. Congratulations!`
+        solved = true
+        return
+    }
     createNewRow(board)
   }
-  localStorage.setItem("last_date", (new Date()).toDateString())
 }
 
 function toggleDarkmode() {
