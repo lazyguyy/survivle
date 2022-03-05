@@ -279,8 +279,10 @@ function checkDailyProgress() {
   }
   localStorage.setItem("last_date", (new Date()).toDateString())
   for (const word of localStorage.getItem("entered_words").split(",")) {
-    if (word == "") continue
-    console.log(`Submitting ${word} from cache`)
+    if (word == "") {
+      notifications.textContent = "Daily Survivle"
+      break
+    }
     updateBoard(board, word)
     score = computeScore(target_word, word)
     updateHints(word, score, hints)
