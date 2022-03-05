@@ -20,6 +20,6 @@ If you feel that there is a bug with the forcing-you-to-use-all-information part
 Additionally, I tried to make the game playable on all platforms and browsers. Since I'm an amateur web developer with access to only a very select few browser and system configurations, there might be visual bugs all over the place.
 If you notice them, I'd also kindly implore you to report them to me (I might try and fix them, but no guarantees!). 
 
-On a similar notice, if you are a more experienced web developer who gets physically ill simply by looking at my code and all the violated best practices, please let me know. This was hacked together from multiple (partly contradicting) stackoverflow posts.
+On a similar note, if you are a more experienced web developer who gets physically ill simply by looking at my code and all the violated best practices, please let me know. This was hacked together from multiple (partly contradicting) stackoverflow posts.
 
 
