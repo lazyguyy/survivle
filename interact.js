@@ -11,8 +11,19 @@ class DefaultDict {
   }
 }
 
-numbers = ["zero", "one", "two", "three", "four", "five"]
-ordinals = ["", "first", "second", "third", "fourth", "fifth"]
+String.prototype.hashCode = function() {
+  var hash = 0, i, chr;
+  if (this.length === 0) return hash;
+  for (i = 0; i < this.length; i++) {
+    chr   = this.charCodeAt(i);
+    hash  = ((hash << 5) - hash) + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return hash;
+};
+
+let numbers = ["zero", "one", "two", "three", "four", "five"]
+let ordinals = ["", "first", "second", "third", "fourth", "fifth"]
 
 function numerus(count, singular, plural) {
     if (count == 1)
@@ -39,6 +50,7 @@ let target_word;
 let target_length;
 let entered_word = ""
 let solved = false
+let solving_daily = true
 
 let hints = Object()
 
@@ -212,6 +224,14 @@ function submitWord(board, word, hints) {
     for (var i = 0; i < target_word.length; ++i) {
         row.children[i].className = ["gray", "yellow", "green"][score[i]]
     }
+    if (solving_daily) {
+      previous = localStorage.getItem("entered_words")
+      if (previous != null && previous != "") {
+        localStorage.setItem("entered_words", previous + "," + word) 
+      } else {
+        localStorage.setItem("entered_words", entered_word)
+      }
+    }
     if (score.every(x => x == 2)) {
         notifications.textContent = `You survived for ${board.rows.length} rounds. Congratulations!`
         solved = true
@@ -251,6 +271,27 @@ function react(key) {
     }
 }
 
+function checkDailyProgress() {
+  last_date = localStorage.getItem("last_date")
+  // no cached words need to be displayed because it's either the user's first time or they last played yesterday
+  if (last_date == undefined || (new Date(last_date)).toDateString() != (new Date()).toDateString()) {
+    localStorage.setItem("entered_words", "")
+  }
+  for (const word of localStorage.getItem("entered_words").split(",")) {
+    if (word == "") continue
+    console.log(`Submitting ${word} from cache`)
+    updateBoard(board, word)
+    score = computeScore(target_word, word)
+    updateHints(word, score, hints)
+    let row = board.rows.item(board.rows.length - 1)
+    for (var i = 0; i < target_word.length; ++i) {
+        row.children[i].className = ["gray", "yellow", "green"][score[i]]
+    }
+    createNewRow(board)
+  }
+  localStorage.setItem("last_date", (new Date()).toDateString())
+}
+
 function toggleDarkmode() {
     document.body.classList.toggle("darkmode")
     for (const e of document.getElementsByClassName("option-button"))
@@ -273,8 +314,12 @@ document.addEventListener("DOMContentLoaded", () => {
         toggleDarkmode()
         localStorage.setItem("darkmode", document.body.classList.contains("darkmode"))
     }
+
     if (localStorage.getItem("darkmode") == "true") {
         toggleDarkmode()
     }
     newGame()
+    target_word = target_words[(new Date()).toDateString().hashCode() % target_words.length]
+    solving_daily = true
+    checkDailyProgress()
 })
