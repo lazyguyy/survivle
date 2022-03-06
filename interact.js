@@ -122,7 +122,11 @@ function updateHints(word, score, hints) {
 }
 
 function showSolution() {
-  notifications.textContent = `The secret word is ${target_word.toUpperCase()}.`
+    if (solving_daily) {
+        notifications.textContent = "No peeking in daily mode"
+        return
+    }
+    notifications.textContent = `The secret word is ${target_word.toUpperCase()}.`
 }
 
 function newGame() {
