@@ -124,9 +124,10 @@ function updateHints(word, score, hints) {
 function showSolution() {
     if (solving_daily) {
         notifications.textContent = "No peeking in daily mode"
-        return
+    } else {
+        notifications.textContent = `The secret word is ${target_word.toUpperCase()}.`
     }
-    notifications.textContent = `The secret word is ${target_word.toUpperCase()}.`
+    document.getElementById("reveal").blur()
 }
 
 function newGame() {
