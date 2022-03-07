@@ -145,7 +145,7 @@ function newGame() {
         }
 
     }
-
+    solving_daily = false
     // index -> letter
     hints.fixed_positions = {}
     // index -> {letter1, letter2, ...}
