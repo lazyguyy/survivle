@@ -103,6 +103,7 @@ function submitWord(word) {
         solved = true
         board.setNotificationText(result.message)
         document.getElementById("share").style.display="inline-block"
+        board.scrollToBottom()
         return
     }
     board.createNewRow()

@@ -176,6 +176,7 @@ html, body {
     padding: 1vmin;
     background-color: seagreen;
     border: none;
+    margin-bottom: 0.5vmin;
 }
 
 #share:active {

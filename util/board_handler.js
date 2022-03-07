@@ -87,6 +87,10 @@ function createNewRow(length) {
     let row = board.insertRow(board.rows.length)
     row.className = "board-row"
     row.innerHTML = "<td></td>".repeat(length)
+    scrollToBottom()
+}
+
+function scrollToBottom() {
     game_area.scrollTop = game_area.scrollHeight
 }
 
@@ -97,4 +101,4 @@ function reset(length) {
     clearNotitifacionText()
 }
 
-export {writeTextToBoard, colorBoard, colorKeys, uncolorKeys, createKeyboard, createNewRow, setNotificationText, clearNotitifacionText, reset}
+export {scrollToBottom, writeTextToBoard, colorBoard, colorKeys, uncolorKeys, createKeyboard, createNewRow, setNotificationText, clearNotitifacionText, reset}
