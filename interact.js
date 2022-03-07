@@ -31,6 +31,8 @@ let target_length;
 let entered_word = ""
 let solved = false
 let solving_daily = true
+let start_date = new Date("Mar 05 2022")
+let daily_number = (new Date((new Date()).toDateString()) - start_date) / (1000 * 60 * 60 * 24)
 
 function reveal() {
     if (solved)
@@ -56,7 +58,21 @@ function reset() {
 }
 
 function share() {
-    navigator.clipboard.writeText(judge.history)
+    let text_to_share = ""
+    let game_history = judge.history
+    if (solving_daily) {
+        let rows = game_history.split("\n").length - 1
+        text_to_share = `Survivle ${daily_number}: ${rows} rounds\n`
+    }
+    text_to_share += game_history
+    if (navigator.share) {
+        navigatore.share({
+            title: "Share your Survivle result",
+            text: text_to_share
+        })
+    } else {
+        navigator.clipboard.writeText(text_to_share)
+    }
 }
 
 function onEnter(word, hints) {

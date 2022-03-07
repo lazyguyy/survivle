@@ -170,10 +170,10 @@ html, body {
 }
 
 #share {
-    width: 30%;
+    width: 50%;
     color: white;
     font-size: 3vmin;
-    padding: 1vmin;
+    padding: 1vh;
     background-color: seagreen;
     border: none;
     margin-bottom: 0.5vmin;
