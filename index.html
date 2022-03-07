@@ -10,8 +10,8 @@
     <title>Survivle</title>
 </head>
 <body>
-<div class="overlay" id="help-overlay" onclick="hideHelp()">
-    <div class="overlay-content" onclick="hideHelp()">
+<div class="overlay" id="help-overlay">
+    <div class="overlay-content" id="help-overlay-content">
         This is yet another creation inspired by Josh Wardle's fantastic <a href="https://www.powerlanguage.co.uk/wordle/">Wordle</a> and qntm's very cool adversarial version <a href="https://qntm.org/files/absurdle/absurdle.html">Absurdle</a>.<br><br>
 
         The game plays just like the original in a (even stricter) hardmode: <b>All</b> revealed information has to be used. However, the goal now is to take as many <b>wrong</b> guesses as possible.<br><br>
@@ -20,19 +20,21 @@
 
         Good Luck!<br><br>
 
-        Found a bug? Please report it <a href="https://github.com/lazyguyy/survivle/issues">here</a>.
+        Found a bug? Please report it <a href="https://github.com/lazyguyy/survivle/issues">here</a>.<br>
+        You can also contact me on <a href="https://twitter.com/lazyguyy_">twitter</a> or <a href="https://www.reddit.com/user/lazyguyy/">reddit</a>.
     </div>
 </div>
 <div class="game">
     <div id="titlebar">
-        <button id="help" class="option-button" title="Show Help" onclick="showHelp()"></button><!--
-        --><button id="restart" class="option-button" title="New (random) Survivle" onclick="newGame()"></button><!--
+        <button id="help" class="option-button" title="Show Help"></button><!--
+        --><button id="restart" class="option-button" title="New (random) Survivle"></button><!--
         --><div class="notifications-wrapper" ><div class="notifications-text" id="notifications"></div></div><!--
-        --><button id="reveal" class="option-button" title="Reveal Secret Word" onclick="showSolution()"></button><!--
+        --><button id="reveal" class="option-button" title="Reveal Secret Word"></button><!--
         --><button id="toggle-darkmode" class="option-button" title="Toggle Darkmode"></button>
     </div>
     <div class="game-area" id="game-area">
         <table class="board" id="board"></table>
+        <button id="share">Share</button>
     </div>
     <div class="keyboard" id="keyboard"></div>
 </div>
