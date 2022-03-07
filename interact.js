@@ -66,7 +66,7 @@ function share() {
     }
     text_to_share += game_history
     if (navigator.share) {
-        navigatore.share({
+        navigator.share({
             title: "Share your Survivle result",
             text: text_to_share
         })
