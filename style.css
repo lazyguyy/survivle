@@ -169,6 +169,19 @@ html, body {
     background-size: cover;
 }
 
+#share {
+    width: 30%;
+    color: white;
+    font-size: 3vmin;
+    padding: 1vmin;
+    background-color: seagreen;
+    border: none;
+}
+
+#share:active {
+    background-color: lightseagreen;
+}
+
 .inverted {
     filter: invert(1);
 }
