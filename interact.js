@@ -1,15 +1,5 @@
-class DefaultDict {
-  constructor(defaultVal) {
-    return new Proxy({}, {
-      get: function(target, name) {
-        if (!(name in target))
-            target[name] = defaultVal()
-        return target[name]
-        },
-      has: (target, name) => name in target
-    })
-  }
-}
+import {makeEmptyHints, computeScore, usesInfo, updateHints} from "./util/hint_manager.js"
+import {DefaultDict} from "./util/default_dict.js"
 
 String.prototype.hashCode = function() {
   var hash = 0, i, chr;
@@ -54,73 +44,6 @@ let solving_daily = true
 
 let hints = Object()
 
-
-function uses_info(word, hints){
-    letter_counts = new DefaultDict(() => 0)
-    for (let i = 0; i < word.length; ++i) {
-        letter_counts[word[i]]++
-        if (i in hints.fixed_positions && word[i] != hints.fixed_positions[i]) {
-            notifications.textContent = `The ${ordinals[i + 1]} letter must be ${hints.fixed_positions[i].toUpperCase()}.`
-            return false
-        }
-        if (hints.blocked_positions[i].has(word[i])) {
-            notifications.textContent = `The ${ordinals[i + 1]} letter cannot be ${word[i].toUpperCase()}.`
-            return false
-        }
-    }
-    for (const letter of Object.keys(hints.letter_counts)) {
-        if (hints.letter_counts[letter] > letter_counts[letter]) {
-            notifications.textContent = `The word contains the letter ${letter.toUpperCase()} ${hints.gray_letters.has(letter) ? "exactly" : "at least"} ${numerus(hints.letter_counts[letter], "time", "times")}.`
-            return false
-        }
-        if (hints.gray_letters.has(letter) && letter_counts[letter] > hints.letter_counts[letter]) {
-            if (hints.letter_counts[letter] == 0) {
-                notifications.textContent = `The word does not contain the letter ${letter.toUpperCase()}.`
-
-            } else {
-                notifications.textContent = `The word contains the letter ${letter.toUpperCase()} only ${numerus(hints.letter_counts[letter], "time", "times")}.`
-            }
-            return false
-        }
-    }
-    return true
-}
-
-function updateHints(word, score, hints) {
-    counts = new DefaultDict(() => 0)
-    gray_letters = new Set()
-    for (let i = 0; i < word.length; ++i) {
-        button = document.getElementById(word[i])
-        switch (score[i]){
-            case 0:
-                gray_letters.add(word[i])
-                hints.blocked_positions[i].add(word[i])
-                if (button.className == "")
-                    button.className = "gray"
-                break
-            case 1:
-                hints.blocked_positions[i].add(word[i])
-                if (button.className != "green")
-                    button.className = "yellow"
-                counts[word[i]]++
-                break
-            case 2:
-                hints.fixed_positions[i] = word[i]
-                button.className = "green"
-                counts[word[i]]++
-        }
-    }
-    for (const letter of Object.keys(counts)) {
-        if (counts[letter] > hints.letter_counts[letter]) {
-            hints.letter_counts[letter] = counts[letter]
-        }
-    }
-    for (const letter of gray_letters) {
-        hints.gray_letters.add(letter)
-        hints.letter_counts[letter] = counts[letter]
-    }
-}
-
 function showSolution() {
     if (solving_daily) {
         notifications.textContent = "No peeking in daily mode"
@@ -138,46 +61,18 @@ function newGame() {
     board.innerHTML = ""
     createNewRow(board, target_length)
 
+    hints = makeEmptyHints()
+
     for (const className of ["gray", "yellow", "green"]) {
-        colored_buttons = document.getElementsByClassName(className)
+        let colored_buttons = document.getElementsByClassName(className)
         for (let i = colored_buttons.length - 1; i >= 0; --i) {
             colored_buttons[i].classList.toggle(className)
         }
 
     }
     solving_daily = false
-    // index -> letter
-    hints.fixed_positions = {}
-    // index -> {letter1, letter2, ...}
-    hints.blocked_positions = new DefaultDict(() => new Set())
-    // letter -> count
-    hints.letter_counts = new DefaultDict(() => 0)
-    // {letter1, letter2, ...}
-    hints.gray_letters = new Set()
     notifications.textContent = ""
     document.getElementById("restart").blur()
-}
-
-function computeScore(target, entered) {
-    n = target.length
-    counts = new DefaultDict(() => 0)
-    for (let i = 0; i < n; ++i) {
-        counts[target[i]]++
-    }
-    score = new Array(n).fill(0)
-    for (let i = 0; i < n; ++i) {
-        if (target[i] == entered[i]) {
-            score[i] = 2
-            counts[target[i]]--
-        }
-    }
-    for (let i = 0; i < n; ++i) {
-        if (score[i] == 0 && counts[entered[i]] > 0) {
-            counts[entered[i]] -= 1
-            score[i] = 1
-        }
-    }
-    return score
 }
 
 function updateBoard(board, word) {
@@ -214,7 +109,7 @@ function submitWord(board, word, hints) {
         return false
     }
 
-    if (!uses_info(word, hints)) {
+    if (!usesInfo(word, hints)) {
         return false
     }
 
@@ -223,14 +118,14 @@ function submitWord(board, word, hints) {
         return false
     }
 
-    score = computeScore(target_word, word)
+    let score = computeScore(target_word, word)
     updateHints(word, score, hints)
     let row = board.rows.item(board.rows.length - 1)
     for (var i = 0; i < target_word.length; ++i) {
         row.children[i].className = ["gray", "yellow", "green"][score[i]]
     }
     if (solving_daily) {
-      previous = localStorage.getItem("entered_words")
+      let previous = localStorage.getItem("entered_words")
       if (previous != null && previous != "") {
         localStorage.setItem("entered_words", previous + "," + word) 
       } else {
@@ -251,7 +146,7 @@ function createNewRow(board, length) {
     if (!(length > 0)) {
         length = board.rows[0].children.length
     }
-    row = board.insertRow(board.rows.length)
+    let row = board.insertRow(board.rows.length)
     row.className = "board-row"
     row.innerHTML = "<td></td>".repeat(length)
 }
@@ -277,7 +172,7 @@ function react(key) {
 }
 
 function checkDailyProgress() {
-  last_date = localStorage.getItem("last_date")
+  let last_date = localStorage.getItem("last_date")
   // no cached words need to be displayed because it's either the user's first time or they last played yesterday
   if (last_date == undefined || (new Date(last_date)).toDateString() != (new Date()).toDateString()) {
     localStorage.setItem("entered_words", "")
