@@ -13,12 +13,12 @@ const green_block = "\uD83D\uDFE9"
 const blocks = [black_block, yellow_block, green_block]
 
 const messages = [
-"One round? Impressive, but in a bad way.",
+"One round? If only this was Wordle.",
 "At least you didn't lose immediately.",
 "Three rounds? Better luck next time!",
 "You survived for four rounds. I have seen worse.",
-"Five rounds? That's almost decent.",
-"Sooo close to winning Survivle :(",
+"Five rounds? That's close to winning!",
+"Sooo close to truly beating Survivle :(",
 "Seven rounds? You did it! Very good!",
 "Eight rounds? That is incredible!",
 "Nine rounds? A true god amongst Survivlors.",]
