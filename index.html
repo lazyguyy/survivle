@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="google-site-verification" content="nCTj2T7D2yA2_2Uj3sBC3kSOgQjj_VjugKWN194shuM" />
     <link rel="stylesheet" href="style.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/fav/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/fav/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/fav/favicon-16x16.png">
+    <title>Survivle</title>
     <meta name="description" content="Survivle is like Wordle except you have to try to avoid guessing the secret word for as long as possible. It's more challenging than you might expect!">
     <meta property="description" content="It is like Wordle, except you try to not guess the word.">
     <meta property="og-description" content="It is like Wordle, except you try to not guess the word.">
-    <title>Survivle</title>
 </head>
 <body>
 <div class="overlay" id="help-overlay">
@@ -21,6 +24,51 @@
         Since it is very easy to lose track of the revealed information, the game will let you know what exactly (if anything) is wrong with your current guess. <br><br>
 
         Good Luck!<br><br>
+
+        <hr><br>
+
+        Examples <br><br>
+
+        <table class="board">
+            <tbody>
+                <tr class="board-row">
+                    <td class="green fixed">W</td>
+                    <td>E</td>
+                    <td>A</td>
+                    <td>R</td>
+                    <td>Y</td>
+                </tr>
+            </tbody>
+        </table><br>
+        The letter <b>W</b> is in the word and in the correct spot.<br><br>
+
+        <table class="board">
+            <tbody>
+                <tr class="board-row">
+                    <td>P</td>
+                    <td class="yellow fixed">I</td>
+                    <td>L</td>
+                    <td>L</td>
+                    <td>S</td>
+                </tr>
+            </tbody>
+        </table><br>
+        The letter <b>I</b> is in the word but in a wrong spot.<br><br>
+
+        <table class="board">
+            <tbody>
+                <tr class="board-row">
+                    <td>V</td>
+                    <td>A</td>
+                    <td>G</td>
+                    <td class="gray fixed">U</td>
+                    <td>E</td>
+                </tr>
+            </tbody>
+        </table><br>
+        The letter <b>U</b> is not contained in the word at all.<br><br>
+        <hr><br>
+
 
         Found a bug? Please report it <a href="https://github.com/lazyguyy/survivle/issues">here</a>.<br>
         You can also contact me on <a href="https://twitter.com/lazyguyy_">twitter</a> or <a href="https://www.reddit.com/user/lazyguyy/">reddit</a>.

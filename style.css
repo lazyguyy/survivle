@@ -215,6 +215,18 @@ html, body {
     background-size: cover;
 }
 
+a:visited {
+    color: blue;
+}
+
+.darkmode a {
+    color: var(--high-contrast-yellow);
+}
+
+.darkmode a:visited {
+    color: var(--high-contrast-yellow);
+}
+
 #help {
     background: url( assets/help.svg );
     background-size: cover;
@@ -261,6 +273,7 @@ html, body {
     font-size: var(--option-menu-font-size);
     align-items: center;
     align-content: center;
+    text-align: left;
 }
 
 .darkmode .overlay {
@@ -272,7 +285,7 @@ html, body {
     position: relative;
     width: 70%;
     height: ;
-    text-align: center;
+    text-align: left;
     padding: 0 15% 0 15%;
     margin-top: 10px;
 }
