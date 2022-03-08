@@ -1,22 +1,40 @@
 import {DefaultDict} from "./defaultdict.js"
 
 
-let numbers = ["zero", "one", "two", "three", "four", "five"]
-let ordinals = ["", "first", "second", "third", "fourth", "fifth"]
+const numbers = ["zero", "one", "two", "three", "four", "five"]
+const ordinals = ["", "first", "second", "third", "fourth", "fifth"]
 let hints = makeEmptyHints()
 let history = []
 
-let black_block = "\u2B1B"
-let yellow_block = "\uD83D\uDFE8"
-let green_block = "\uD83D\uDFE9"
+const black_block = "\u2B1B"
+const yellow_block = "\uD83D\uDFE8"
+const green_block = "\uD83D\uDFE9"
 
-let blocks = [black_block, yellow_block, green_block]
+const blocks = [black_block, yellow_block, green_block]
 
+const messages = [
+"One round? Impressive, but in a bad way.",
+"At least you didn't lose immediately.",
+"Three rounds? Better luck next time!",
+"You survived for four rounds. I have seen worse.",
+"Five rounds? That's almost decent.",
+"Sooo close to winning Survivle :(",
+"Seven rounds? You did it! Very good!",
+"Eight rounds? That is incredible!",
+"Nine rounds? A true god amongst Survivlors.",]
+
+const default_message = rounds => `${rounds} ROUNDS? Awe-inspiring performance!`
 
 function numerus(count, singular, plural) {
     if (count == 1)
         return numbers[count] + " " + singular
     return numbers[count] + " " + plural
+}
+
+function congratulate(rounds) {
+    if (rounds <= messages.length)
+        return messages[rounds - 1]
+    return default_message(rounds)
 }
 
 function usesInfo(word){
@@ -138,7 +156,7 @@ function reset() {
 function isSolved(score) {
     let result = Object()
     if (score.every(x => x == 2)) {
-        result.message = `You survived for ${board.rows.length} rounds. Congratulations!`
+        result.message = congratulate(history.split("\n").length - 1)
         result.solved = true
     } else {
         result.solved = false
