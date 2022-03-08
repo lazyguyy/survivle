@@ -33,6 +33,7 @@ let solved = false
 let solving_daily = true
 let start_date = new Date("Mar 05 2022")
 let daily_number = (new Date((new Date()).toDateString()) - start_date) / (1000 * 60 * 60 * 24)
+let last_action = (new Date()).toDateString()
 
 function reveal() {
     if (solved)
@@ -46,13 +47,18 @@ function reveal() {
 }
 
 function reset() {
+    solving_daily = false
     target_word = target_words[Math.floor(Math.random() * target_words.length)]
+    if (last_action != (new Date).toDateString()) {
+        solving_daily = true
+        checkDailyProgress()
+        target_word = getDailyWord()
+    }
     target_length = target_word.length
     entered_word = ""
     solved = false
     board.reset(target_length)
     judge.reset()
-    solving_daily = false
     document.getElementById("restart").blur()
     document.getElementById("share").style.display="none"
 }
@@ -60,17 +66,21 @@ function reset() {
 function share() {
     let text_to_share = ""
     let game_history = judge.history
+    let rows = game_history.split("\n").length - 1
     if (solving_daily) {
-        let rows = game_history.split("\n").length - 1
-        text_to_share = `Survivle ${daily_number}: ${rows} rounds\n`
+        text_to_share = `Daily Survivle ${daily_number}: ${rows} rounds\n`
+    } else {
+        text_to_share = `Random Survivle ${daily_number}: ${rows} rounds\n`
     }
     text_to_share += game_history
     if (navigator.share) {
         navigator.share({
             title: "Share your Survivle result",
-            text: text_to_share
+            text: text_to_share,
+            url: window.location.href,
         })
     } else {
+        text_to_share += window.location.href + "\n"
         navigator.clipboard.writeText(text_to_share)
     }
 }
@@ -131,6 +141,8 @@ function react(key) {
         return
     }
 
+    last_action = (new Date()).toDateString()
+
     if (key == "Backspace"){
         entered_word = entered_word.slice(0, -1)
         board.writeTextToBoard(entered_word)
@@ -177,6 +189,10 @@ function hideHelp() {
     document.getElementById("help-overlay").style.width = "0%"
 }
 
+function getDailyWord() {
+    return target_words[(new Date()).toDateString().hashCode() % target_words.length]
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("keydown", event => react(event.key))
     board.createKeyboard(react)
@@ -192,7 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
         toggleDarkmode()
     }
     reset()
-    target_word = target_words[(new Date()).toDateString().hashCode() % target_words.length]
+    target_word = getDailyWord()
     checkDailyProgress()
     solving_daily = true
 })
