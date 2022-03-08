@@ -18,4 +18,6 @@ const copyToClipboard = str => {
   }
 };
 
-export {copyToClipboard}
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+export {copyToClipboard, delay}

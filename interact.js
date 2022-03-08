@@ -88,6 +88,14 @@ function share() {
             util.copyToClipboard(text_to_share)
         })
     // }
+    let old_text = board.getNotificationText()
+    board.setNotificationText("Copied to Clipboard")
+    postTextAfterDelay(1000, old_text)
+}
+
+async function postTextAfterDelay(delay, text) {
+    await util.delay(1000)
+    board.setNotificationText(text)
 }
 
 function onEnter(word, hints) {

@@ -25,6 +25,10 @@ function setNotificationText(text) {
     notifications.textContent = text
 }
 
+function getNotificationText() {
+    return notifications.textContent
+}
+
 function clearNotitifacionText() {
     notifications.textContent = ""
 }
@@ -101,4 +105,4 @@ function reset(length) {
     clearNotitifacionText()
 }
 
-export {scrollToBottom, writeTextToBoard, colorBoard, colorKeys, uncolorKeys, createKeyboard, createNewRow, setNotificationText, clearNotitifacionText, reset}
+export {scrollToBottom, writeTextToBoard, colorBoard, colorKeys, uncolorKeys, createKeyboard, createNewRow, setNotificationText, clearNotitifacionText, getNotificationText, reset}
