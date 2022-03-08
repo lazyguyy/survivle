@@ -36,7 +36,6 @@ let solved = false
 let solving_daily = true
 let start_date = new Date("Mar 05 2022")
 let daily_number = (new Date((new Date()).toDateString()) - start_date) / (1000 * 60 * 60 * 24)
-let last_action = (new Date()).toDateString()
 
 function reveal() {
     if (solved)
@@ -52,7 +51,11 @@ function reveal() {
 function reset() {
     solving_daily = false
     target_word = target_words[Math.floor(Math.random() * target_words.length)]
-    if (last_action != (new Date).toDateString()) {
+
+    let new_daily_number = (new Date((new Date()).toDateString()) - start_date) / (1000 * 60 * 60 * 24)
+    // A day has passed since the tab was opened and they haven't yet seen the new daily puzzle
+    if (new_daily_number != daily_number) {
+        daily_number = new_daily_number
         solving_daily = true
         checkDailyProgress()
         target_word = getDailyWord()
@@ -155,8 +158,6 @@ function react(key) {
     if (solved) {
         return
     }
-
-    last_action = (new Date()).toDateString()
 
     if (key == "Backspace"){
         entered_word = entered_word.slice(0, -1)
