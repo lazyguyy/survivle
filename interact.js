@@ -1,6 +1,7 @@
 import * as judge from "./util/judge.js"
 import * as board from "./util/board_handler.js"
 import {DefaultDict} from "./util/defaultdict.js"
+import * as util from "./util/utilities.js"
 
 String.prototype.hashCode = function() {
     var hash = 0, i, chr;
@@ -70,19 +71,23 @@ function share() {
     if (solving_daily) {
         text_to_share = `Daily Survivle ${daily_number}: ${rows} rounds\n`
     } else {
-        text_to_share = `Random Survivle ${daily_number}: ${rows} rounds\n`
+        text_to_share = `Random Survivle (${target_word}): ${rows} rounds\n`
     }
     text_to_share += game_history
-    if (navigator.share) {
-        navigator.share({
-            title: "Share your Survivle result",
-            text: text_to_share,
-            url: window.location.href,
+    // if (navigator.share) {
+    //     navigator.share({
+    //         title: "Share your Survivle result",
+    //         text: text_to_share,
+    //         url: window.location.href,
+    //     })
+    // } else {
+    text_to_share += window.location.href + "\n"
+    navigator.clipboard.writeText(text_to_share).then(() => {},
+        // on browsers that dont support navigator.writeText
+        () => {
+            util.copyToClipboard(text_to_share)
         })
-    } else {
-        text_to_share += window.location.href + "\n"
-        navigator.clipboard.writeText(text_to_share)
-    }
+    // }
 }
 
 function onEnter(word, hints) {
