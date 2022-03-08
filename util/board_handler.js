@@ -18,7 +18,7 @@ function writeTextToBoard(word) {
     for (var i = 0; i < length; ++i) {
         row.children[i].textContent = i < word.length ? word[i].toUpperCase() : ""
     }
-    clearNotitifacionText()
+    clearNotificationText()
 }
 
 function setNotificationText(text) {
@@ -29,7 +29,7 @@ function getNotificationText() {
     return notifications.textContent
 }
 
-function clearNotitifacionText() {
+function clearNotificationText() {
     notifications.textContent = ""
 }
 
@@ -56,7 +56,9 @@ function uncolorKeys() {
     for (const className of ["gray", "yellow", "green"]) {
         let colored_buttons = document.getElementsByClassName(className)
         for (let i = colored_buttons.length - 1; i >= 0; --i) {
-            colored_buttons[i].classList.toggle(className)
+            if (!colored_buttons[i].classList.contains("fixed")) {
+                colored_buttons[i].classList.toggle(className)
+            }
         }
     }
 }
@@ -102,7 +104,7 @@ function reset(length) {
     board.innerHTML = ""
     createNewRow(length)
     uncolorKeys()
-    clearNotitifacionText()
+    clearNotificationText()
 }
 
-export {scrollToBottom, writeTextToBoard, colorBoard, colorKeys, uncolorKeys, createKeyboard, createNewRow, setNotificationText, clearNotitifacionText, getNotificationText, reset}
+export {scrollToBottom, writeTextToBoard, colorBoard, colorKeys, uncolorKeys, createKeyboard, createNewRow, setNotificationText, clearNotificationText, getNotificationText, reset}
