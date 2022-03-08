@@ -51,6 +51,12 @@ function reveal() {
 function reset() {
     solving_daily = false
     target_word = target_words[Math.floor(Math.random() * target_words.length)]
+    target_length = target_word.length
+    entered_word = ""
+    solved = false
+    board.reset(target_length)
+    judge.reset()
+
 
     let new_daily_number = (new Date((new Date()).toDateString()) - start_date) / (1000 * 60 * 60 * 24)
     // A day has passed since the tab was opened and they haven't yet seen the new daily puzzle
@@ -60,11 +66,7 @@ function reset() {
         checkDailyProgress()
         target_word = getDailyWord()
     }
-    target_length = target_word.length
-    entered_word = ""
-    solved = false
-    board.reset(target_length)
-    judge.reset()
+
     document.getElementById("restart").blur()
     document.getElementById("share").style.display="none"
 }
