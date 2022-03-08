@@ -16,7 +16,7 @@ const messages = [
 "One round? If only this was Wordle.",
 "At least you didn't lose immediately.",
 "Three rounds? Better luck next time!",
-"You survived for four rounds. I have seen worse.",
+"You survived for four rounds. Kinda alright.",
 "Five rounds? That's close to winning!",
 "Sooo close to truly beating Survivle :(",
 "Seven rounds? You did it! Very good!",
