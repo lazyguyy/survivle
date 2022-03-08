@@ -4,6 +4,10 @@
     --game-cell-fontsize: min(10.5vmin, 5.5vh);
     --key-width: min(4vw, 3.5vh);
     --key-height: 7vh;
+    --high-contrast-yellow: #0accf7;
+    --high-contrast-green: darkorange;
+    --option-menu-font-size: min(5vw, 4vh);
+    --keyboard-letter-size: min(3.5vh, 6vw);
 }
 
 html, body {
@@ -18,6 +22,9 @@ html, body {
     color: white;
     border-color: white;
     border: none;
+}
+
+.high-contrast {
 }
 
 .titlebar {
@@ -87,6 +94,14 @@ html, body {
     background-color: forestgreen;
 }
 
+.high-contrast .yellow {
+    background-color: var(--high-contrast-yellow);
+}
+
+.high-contrast .green {
+    background-color: var(--high-contrast-green);
+}
+
 .game {
     text-align: center;
     width: 100vw;
@@ -111,13 +126,13 @@ html, body {
     border-style: solid;
     color: black;
     display:  inline-flex;
-    padding: 0.8em 0.7em;
+    padding: var(--keyboard-letter-size) calc(2*var(--keyboard-letter-size)/3);
     width: var(--key-width);
     height: var(--key-height);
-    margin: 0.05em;
+    margin: calc(0.05 * var(--keyboard-letter-size));
     justify-content: center;
     align-items: center;
-    font-size: min(3.5vh, 6vw);
+    font-size: var(--keyboard-letter-size);
 }
 
 .darkmode .keyboard button {
@@ -139,6 +154,15 @@ html, body {
     background-color: forestgreen;
 }
 
+.high-contrast .keyboard .yellow {
+    background-color: var(--high-contrast-yellow);
+}
+
+.high-contrast .keyboard .green {
+    background-color: var(--high-contrast-green);
+}
+
+
 .option-button {
     border: none;
     width: calc(2*var(--game-cell-width)/5);
@@ -149,8 +173,40 @@ html, body {
     vertical-align: top;
 }
 
+.close-button {
+    float: right;
+    margin-top: 3vh;
+    margin-right: 10vw;
+    width: 6vh;
+    height: 6vh;
+    border: none;
+    background: url( assets/close.svg );
+    background-size: cover;
+
+}
+
+.option-row {
+    width: min(50vh, 100vw);
+    padding-left: calc((100% - min(50vh, 100vw))/2);
+    display: flex;
+    margin: 4vh;
+    font-size: var(--option-menu-font-size);
+}
+
+
+.toggle-button {
+    margin: calc(var(--option-menu-font-size)/13) 1em 0 1em;
+    width: var(--option-menu-font-size);
+    height: var(--option-menu-font-size);
+}
+
 #toggle-darkmode {
     background: url( assets/dark-mode.svg );
+    background-size: cover;
+}
+
+#toggle-contrast {
+    background: url( assets/contrast.svg );
     background-size: cover;
 }
 
@@ -169,7 +225,13 @@ html, body {
     background-size: cover;
 }
 
+#options {
+    background: url( assets/options.svg );
+    background-size: cover;
+}
+
 #share {
+    display: none;
     width: 50%;
     color: white;
     font-size: 3vmin;
@@ -196,7 +258,7 @@ html, body {
     left: 0;
     overflow-x: hidden;
     background-color: white;
-    font-size: 4vh;
+    font-size: var(--option-menu-font-size);
     align-items: center;
     align-content: center;
 }
@@ -209,9 +271,10 @@ html, body {
     display:  inline-block;
     position: relative;
     width: 70%;
+    height: ;
     text-align: center;
-    padding: 5% 15% 0 15%;
-    margin-top: 30px;
+    padding: 0 15% 0 15%;
+    margin-top: 10px;
 }
 
 .darkmode .overlay-content {

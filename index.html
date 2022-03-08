@@ -12,6 +12,7 @@
 </head>
 <body>
 <div class="overlay" id="help-overlay">
+    <div style="height:2vh;"></div>
     <div class="overlay-content" id="help-overlay-content">
         Inspired by Josh Wardle's fantastic <a href="https://www.powerlanguage.co.uk/wordle/">Wordle</a> and qntm's very cool adversarial version <a href="https://qntm.org/files/absurdle/absurdle.html">Absurdle</a>, in Survivle it is your goal to <b>lose</b>!<br><br>
 
@@ -25,13 +26,28 @@
         You can also contact me on <a href="https://twitter.com/lazyguyy_">twitter</a> or <a href="https://www.reddit.com/user/lazyguyy/">reddit</a>.
     </div>
 </div>
+<div class="overlay" id="options-overlay">
+    <div class="overlay-titlebar">
+        <button class="close-button invertable" id="close-options"></button>
+    </div>
+    <div class="overlay-content" id="options-overlay-content">
+        <div class="option-row">
+            <input id="toggle-darkmode" type="checkbox" class="toggle-button invertable" title="Toggle Darkmode">
+            <div class="button-label">Dark Theme</div>
+        </div>
+        <div class="option-row">
+            <input id="toggle-contrast" type="checkbox" class="toggle-button invertable" title="Toggle High Contrast">
+            <div class="button-label">High Contrast</div>
+        </div>
+    </div>
+</div>
 <div class="game">
     <div id="titlebar">
-        <button id="help" class="option-button" title="Show Help"></button><!--
-        --><button id="restart" class="option-button" title="New (random) Survivle"></button><!--
+        <button id="help" class="option-button invertable" title="Show Help"></button><!--
+        --><button id="restart" class="option-button invertable" title="New (random) Survivle"></button><!--
         --><div class="notifications-wrapper" ><div class="notifications-text" id="notifications"></div></div><!--
-        --><button id="reveal" class="option-button" title="Reveal Secret Word"></button><!--
-        --><button id="toggle-darkmode" class="option-button" title="Toggle Darkmode"></button>
+        --><button id="reveal" class="option-button invertable" title="Reveal Secret Word"></button><!--
+        --><button id="options" class="option-button invertable" title="Show Options"></button>
     </div>
     <div class="game-area" id="game-area">
         <table class="board" id="board"></table>
