@@ -135,6 +135,10 @@ html, body {
     font-size: var(--keyboard-letter-size);
 }
 
+.keyboard .wider {
+    padding: var(--keyboard-letter-size) var(--keyboard-letter-size);
+}
+
 .darkmode .keyboard button {
     border-width: 1px;
     border-color: white;

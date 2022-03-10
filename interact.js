@@ -215,7 +215,8 @@ function makeShowFunction(id) {
 }
 
 function getDailyWord() {
-    return target_words[(new Date()).toDateString().hashCode() % target_words.length]
+    let index = util.abs((new Date()).toDateString().hashCode()) % target_words.length
+    return target_words[index]
 }
 
 document.addEventListener("DOMContentLoaded", () => {
