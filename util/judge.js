@@ -75,10 +75,12 @@ function usesInfo(word){
 }
 
 function appendToHistory(score) {
+    let line = ""
     for (const s of score) {
-        history += blocks[s]
+        line += blocks[s]
     }
-    history += "\n"
+    line += "\n"
+    history.push(line)
 }
 
 function updateHints(word, score) {
@@ -156,7 +158,7 @@ function reset() {
 function isSolved(score) {
     let result = Object()
     if (score.every(x => x == 2)) {
-        result.message = congratulate(history.split("\n").length - 1)
+        result.message = congratulate(history.length)
         result.solved = true
     } else {
         result.solved = false

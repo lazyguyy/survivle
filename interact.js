@@ -35,7 +35,11 @@ let entered_word = ""
 let solved = false
 let solving_daily = true
 let start_date = new Date("Mar 05 2022")
-let daily_number = (new Date((new Date()).toDateString()) - start_date) / (1000 * 60 * 60 * 24)
+let daily_number = getDailyNumber()
+
+function getDailyNumber() {
+    return (new Date((new Date()).toDateString()) - start_date) / (1000 * 60 * 60 * 24)
+}
 
 function reveal() {
     if (solved)
@@ -58,7 +62,7 @@ function reset() {
     judge.reset()
 
 
-    let new_daily_number = (new Date((new Date()).toDateString()) - start_date) / (1000 * 60 * 60 * 24)
+    let new_daily_number = getDailyNumber()
     // A day has passed since the tab was opened and they haven't yet seen the new daily puzzle
     if (new_daily_number != daily_number) {
         daily_number = new_daily_number
@@ -74,13 +78,13 @@ function reset() {
 function share() {
     let text_to_share = ""
     let game_history = judge.history
-    let rows = game_history.split("\n").length - 1
+    let rows = game_history.length - 1
     if (solving_daily) {
         text_to_share = `Daily Survivle ${daily_number}: ${rows} rounds\n`
     } else {
         text_to_share = `Random Survivle (${target_word}): ${rows} rounds\n`
     }
-    text_to_share += game_history
+    text_to_share += game_history.join()
     // if (navigator.share) {
     //     navigator.share({
     //         title: "Share your Survivle result",
@@ -129,14 +133,14 @@ function onEnter(word, hints) {
     return true
 }
 
-function submitWord(word) {
+function submitWord(word, writeToCache=true) {
     let score = judge.computeScore(target_word, word)
     judge.updateHints(word, score)
     judge.appendToHistory(score)
     board.colorKeys(word, score)
     board.colorBoard(score)
     board.writeTextToBoard(word)
-    if (solving_daily) {
+    if (solving_daily && writeToCache) {
         let previous = localStorage.getItem("entered_words")
             if (previous != null && previous != "") {
             localStorage.setItem("entered_words", previous + "," + word)
@@ -165,6 +169,11 @@ function react(key) {
         entered_word = entered_word.slice(0, -1)
         board.writeTextToBoard(entered_word)
     } else if (key == "Enter") {
+        if (solving_daily && loadCache()) {
+            board.writeTextToBoard(entered_word)
+            board.setNotificationText("Reloading Cache (Did you play in another tab?)")
+            return
+        }
         if (onEnter(entered_word)) {
             entered_word = ""
         }
@@ -182,14 +191,25 @@ function checkDailyProgress() {
         localStorage.setItem("entered_words", "")
     }
     localStorage.setItem("last_date", (new Date()).toDateString())
-    for (const word of localStorage.getItem("entered_words").split(",")) {
+    if (localStorage.getItem("entered_words") != "") {
+        loadCache()
+    } else {
+        board.setNotificationText("Daily Survivle")
+    }
+}
+
+function loadCache() {
+    let submittedWord = false
+    for (const word of localStorage.getItem("entered_words").split(",").slice(judge.history.length)) {
         // Cached words are empty --> first word for daily puzzle has to be entered
         if (word == "") {
-            board.setNotificationText("Daily Survivle")
             break
         }
-        submitWord(word)
+        submitWord(word, false)
+        submittedWord = true
     }
+    return submittedWord
+
 }
 
 function toggleDarkmode() {
@@ -215,7 +235,18 @@ function makeShowFunction(id) {
 }
 
 function getDailyWord() {
-    let index = util.abs((new Date()).toDateString().hashCode()) % target_words.length
+    let index;
+    // phase out random daily word selection to get rid of the possibility of collisions
+    // instead cycle through the secret words, but in a different order than NYT
+    // Just choose random step width coprime to 2309
+    if (daily_number >= 10) {
+        let p1 = 656
+        let p2 = 1012
+        let offset = 626
+        index = (offset + daily_number * p1 + Math.floor(daily_number / target_words.length) * p2) % target_words.length
+    } else {
+        index = util.abs((new Date()).toDateString().hashCode()) % target_words.length
+    }
     return target_words[index]
 }
 
