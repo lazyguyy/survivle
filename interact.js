@@ -84,7 +84,7 @@ function share() {
     } else {
         text_to_share = `Random Survivle (${target_word}): ${rows} rounds\n`
     }
-    text_to_share += game_history.join()
+    text_to_share += game_history.join("")
     // if (navigator.share) {
     //     navigator.share({
     //         title: "Share your Survivle result",
