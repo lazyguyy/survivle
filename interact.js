@@ -78,7 +78,7 @@ function reset() {
 function share() {
     let text_to_share = ""
     let game_history = judge.history
-    let rows = game_history.length - 1
+    let rows = game_history.length
     if (solving_daily) {
         text_to_share = `Daily Survivle ${daily_number}: ${rows} rounds\n`
     } else {
