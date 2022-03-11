@@ -37,40 +37,40 @@ function congratulate(rounds) {
     return default_message(rounds)
 }
 
+function updateJudgeResult(result, message, severity) {
+    result.is_valid = false
+    if (result.severity == undefined || result.severity > severity) {
+        result.message = message
+        result.severity = severity
+    }
+}
+
 function usesInfo(word){
     let letter_counts = new DefaultDict(() => 0)
     let result = Object()
+    result.is_valid = true
     for (let i = 0; i < word.length; ++i) {
         letter_counts[word[i]]++
         if (i in hints.fixed_positions && word[i] != hints.fixed_positions[i]) {
-            result.message = `The ${ordinals[i + 1]} letter must be ${hints.fixed_positions[i].toUpperCase()}.`
-            result.is_valid = false
-            return result
+            updateJudgeResult(result, `The ${ordinals[i + 1]} letter must be ${hints.fixed_positions[i].toUpperCase()}.`, 0)
         }
         if (hints.blocked_positions[i].has(word[i])) {
-            result.message = `The ${ordinals[i + 1]} letter cannot be ${word[i].toUpperCase()}.`
-            result.is_valid = false
-            return result
+            updateJudgeResult(result, `The ${ordinals[i + 1]} letter cannot be ${word[i].toUpperCase()}.`, 3)
         }
     }
     for (const letter of Object.keys(hints.letter_counts)) {
         if (hints.letter_counts[letter] > letter_counts[letter]) {
-            result.message = `The word contains the letter ${letter.toUpperCase()} ${hints.gray_letters.has(letter) ? "exactly" : "at least"} ${numerus(hints.letter_counts[letter], "time", "times")}.`
-            result.is_valid = false
-            return result
+            updateJudgeResult(result, `The word contains the letter ${letter.toUpperCase()} ${hints.gray_letters.has(letter) ? "exactly" : "at least"} ${numerus(hints.letter_counts[letter], "time", "times")}.`, 1)
         }
         if (hints.gray_letters.has(letter) && letter_counts[letter] > hints.letter_counts[letter]) {
             if (hints.letter_counts[letter] == 0) {
-                result.message = `The word does not contain the letter ${letter.toUpperCase()}.`
+                updateJudgeResult(result, `The word does not contain the letter ${letter.toUpperCase()} at all.`, 1)
 
             } else {
-                result.message = `The word contains the letter ${letter.toUpperCase()} only ${numerus(hints.letter_counts[letter], "time", "times")}.`
+                updateJudgeResult(result, `The word contains the letter ${letter.toUpperCase()} only ${numerus(hints.letter_counts[letter], "time", "times")}.`, 2)
             }
-            result.is_valid = false
-            return result
         }
     }
-    result.is_valid = true
     return result
 }
 
