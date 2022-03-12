@@ -13,7 +13,7 @@ const green_block = "\uD83D\uDFE9"
 const blocks = [black_block, yellow_block, green_block]
 
 const messages = [
-"One round? If only this was Wordle.",
+"One round? If only this were Wordle.",
 "At least you didn't lose immediately.",
 "Three rounds? Better luck next time!",
 "You survived for four rounds. Kinda alright.",
