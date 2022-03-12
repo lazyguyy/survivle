@@ -93,12 +93,16 @@ function share() {
     //     })
     // } else {
     text_to_share += window.location.href + "\n"
+    if (navigator.clipboard && window.isSecureContext) {
     navigator.clipboard.writeText(text_to_share).then(() => {},
         // on browsers that dont support navigator.writeText
         () => {
             util.copyToClipboard(text_to_share)
         })
     // }
+    } else {
+        util.copyToClipboard(text_to_share)
+    }
     let old_text = board.getNotificationText()
     board.setNotificationText("Copied to Clipboard")
     postTextAfterDelay(1000, old_text)
