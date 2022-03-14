@@ -38,7 +38,7 @@ let start_date = new Date("Mar 05 2022")
 let daily_number = getDailyNumber()
 
 function getDailyNumber() {
-    return (new Date((new Date()).toDateString()) - start_date) / (1000 * 60 * 60 * 24)
+    return Math.floor((new Date() - start_date) / (1000 * 60 * 60 * 24))
 }
 
 function reveal() {
