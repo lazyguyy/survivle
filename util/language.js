@@ -39,7 +39,7 @@ const english_hints = {
 function loadLanguageFiles(language) {
     if (language in wordlists)
         return
-    request_file("")
+    request_file("en_valid_words.txt", )
 
 }
 
