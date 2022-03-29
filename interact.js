@@ -68,10 +68,11 @@ function reset() {
         daily_number = new_daily_number
         solving_daily = true
         checkDailyProgress()
-        target_word = getDailyWord()
+        target_word = getDailyWord(getDailyNumber())
     }
 
     document.getElementById("restart").blur()
+    document.getElementById("yesterdays-survivle").textContent = target_words[getDailyNumber()-1].toUpperCase()
     document.getElementById("share").style.display="none"
 }
 
@@ -251,19 +252,15 @@ function makeShowFunction(id) {
     return () => document.getElementById(id).style.width = "100%"
 }
 
-function getDailyWord() {
+function getDailyWord(daily_number) {
     let index;
     // phase out random daily word selection to get rid of the possibility of collisions
     // instead cycle through the secret words, but in a different order than NYT
     // Just choose random step width coprime to 2309
-    if (daily_number >= 10) {
-        let p1 = 656
-        let p2 = 1012
-        let offset = 626
-        index = (offset + daily_number * p1 + Math.floor(daily_number / target_words.length) * p2) % target_words.length
-    } else {
-        index = util.abs((new Date()).toDateString().hashCode()) % target_words.length
-    }
+    let p1 = 656
+    let p2 = 1012
+    let offset = 626
+    index = (offset + daily_number * p1 + Math.floor(daily_number / target_words.length) * p2) % target_words.length
     return target_words[index]
 }
 
@@ -292,7 +289,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("toggle-contrast").checked = true
     }
     reset()
-    target_word = getDailyWord()
+    target_word = getDailyWord(getDailyNumber())
     checkDailyProgress()
     solving_daily = true
 })
