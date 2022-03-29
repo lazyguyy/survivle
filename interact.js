@@ -145,7 +145,7 @@ function submitWord(word, writeToCache=true) {
     board.colorKeys(word, score)
     board.colorBoard(score)
     board.writeTextToBoard(word)
-    if (solving_daily && writeToCache) {
+    if (solving_daily && writeToCache && daily_number == getDailyNumber()) {
         let previous = localStorage.getItem("entered_words")
             if (previous != null && previous != "") {
             localStorage.setItem("entered_words", previous + "," + word)
