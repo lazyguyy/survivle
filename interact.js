@@ -72,7 +72,7 @@ function reset() {
     }
 
     document.getElementById("restart").blur()
-    document.getElementById("yesterdays-survivle").textContent = target_words[getDailyNumber()-1].toUpperCase()
+    document.getElementById("yesterdays-survivle").textContent = getDailyWord(getDailyNumber()-1).toUpperCase()
     document.getElementById("share").style.display="none"
 }
 
