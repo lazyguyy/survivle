@@ -190,19 +190,6 @@ function react(key) {
 }
 
 function checkDailyProgress() {
-    if (getDailyNumber() > 24) {
-        let last_daily = localStorage.getItem("last_daily")
-        if (last_daily == undefined || last_daily != getDailyNumber()) {
-            localStorage.setItem("entered_words", "")
-        }
-        localStorage.setItem("last_daily", getDailyNumber())
-        if (localStorage.getItem("entered_words") != "") {
-            loadCache()
-        } else {
-            board.setNotificationText("Daily Survivle")
-        }
-        return
-    }
     let last_date = localStorage.getItem("last_date")
     // no cached words need to be displayed because it's either the user's first time or they last played yesterday
     if (last_date == undefined || (new Date(last_date)).toDateString() != (new Date()).toDateString()) {
@@ -214,6 +201,7 @@ function checkDailyProgress() {
     } else {
         board.setNotificationText("Daily Survivle")
     }
+    
 }
 
 function loadCache() {
@@ -292,4 +280,6 @@ document.addEventListener("DOMContentLoaded", () => {
     target_word = getDailyWord(getDailyNumber())
     checkDailyProgress()
     solving_daily = true
+    if (daily_number == 666)
+        board.setNotificationText("Happy New Year Tpat & Tdan")
 })
