@@ -280,6 +280,6 @@ document.addEventListener("DOMContentLoaded", () => {
     target_word = getDailyWord(getDailyNumber())
     checkDailyProgress()
     solving_daily = true
-    if (daily_number == 666)
+    if (daily_number == 666 || daily_number == 667)
         board.setNotificationText("Happy New Year Tpat & Tdan")
 })
