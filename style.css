@@ -160,9 +160,7 @@ html, body {
 .keyboard .wider {
     padding: var(--keyboard-letter-size) var(--keyboard-letter-size);
 }
-.new-/*units .keyboard .wider {
-    padding: var(--keyboard-letter-size-new) var(--keyboard-letter-size-new);
-}*/
+
 
 .darkmode .keyboard button {
     border-width: 1px;
