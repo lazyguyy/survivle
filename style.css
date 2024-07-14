@@ -1,13 +1,17 @@
 :root {
     --darkmode-background: #1a1a1a;
     --game-cell-width: min(13vmin, 8vh);
-    --game-cell-fontsize: min(10.5vmin, 5.5vh);
+    --game-cell-width-new: 2em;
+    --game-cell-fontsize: min(8vmin, 3vh);
+    --game-cell-fontsize-new: 1.5em;
     --key-width: min(4vw, 3.5vh);
     --key-height: 7vh;
     --high-contrast-yellow: #0accf7;
     --high-contrast-green: darkorange;
     --option-menu-font-size: min(5vw, 4vh);
+    --option-menu-font-size-new: 1em;
     --keyboard-letter-size: min(3.5vh, 6vw);
+    --keyboard-letter-size-new: 2em;
 }
 
 html, body {
@@ -52,9 +56,13 @@ html, body {
 }
 
 .board {
+    font-weight: bold;
     border-spacing: 0.8vmin;
     display: inline-block;
     padding-top: 0px;
+}
+.new-units .board {
+    border-spacing: 0.3em;
 }
 
 .board td {
@@ -64,6 +72,12 @@ html, body {
     width: var(--game-cell-width);
     text-align: center;
     font-size: var(--game-cell-fontsize);
+}
+
+.new-units .board td {
+    height: var(--game-cell-width-new);
+    width: var(--game-cell-width-new);
+    font-size: var(--game-cell-fontsize-new);
 }
 
 .darkmode .board td {
@@ -135,9 +149,20 @@ html, body {
     font-size: var(--keyboard-letter-size);
 }
 
+./*new-units .keyboard button {
+/*    padding: var(--keyboard-letter-size-new) calc(2*var(--keyboard-letter-size-new)/3);*/
+/*    width: var(--key-width-new);*/
+/*    height: var(--key-height-new);*/
+/*    margin: calc(0.05 * var(--keyboard-letter-size-new));*/
+/*    font-size: var(--keyboard-letter-size-new);*/
+/*}*/
+
 .keyboard .wider {
     padding: var(--keyboard-letter-size) var(--keyboard-letter-size);
 }
+.new-/*units .keyboard .wider {
+    padding: var(--keyboard-letter-size-new) var(--keyboard-letter-size-new);
+}*/
 
 .darkmode .keyboard button {
     border-width: 1px;
@@ -255,6 +280,12 @@ a:visited {
     background-color: seagreen;
     border: none;
     margin-bottom: 0.5vmin;
+}
+
+.new-units #share {
+    font-size: 1em;
+    padding: 1em;
+    margin-bottom: 0.5em;
 }
 
 #share:active {
