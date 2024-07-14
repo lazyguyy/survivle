@@ -26,6 +26,8 @@ let associated_functions = {
     "toggle-contrast": toggleContrast,
     "toggle-new-units": toggleNewUnits,
     "toggle-darkmode": toggleDarkmode,
+    "show-changelog": function() {makeHideFunction("options-overlay")();makeShowFunction("changelog-overlay")();},
+    "changelog-overlay": makeHideFunction("changelog-overlay"),
 }
 
 let cookie_storage = {
@@ -44,6 +46,7 @@ let solved = false
 let solving_daily = true
 let start_date = new Date("Mar 05 2022")
 let daily_number = getDailyNumber()
+let version = "1.0.1" // important for changelog notice
 
 function getDailyNumber() {
     return Math.floor((new Date() - start_date) / (1000 * 60 * 60 * 24))
@@ -247,6 +250,16 @@ function toggleNewUnits() {
     document.getElementById("toggle-new-units").blur()
 }
 
+function showChangelog() {
+    if (localStorage.getItem("last_changelog") != version) {
+        document.getElementById("changelog-overlay").style.width = "100%";
+        localStorage.setItem("last_changelog", version);
+
+        // Special Behaviour only for this changelog function
+        localStorage.setItem("new-units", true)
+    }
+}
+
 function makeHideFunction(id) {
     return () => {
         document.getElementById(id).style.width = "0%"
@@ -258,29 +271,28 @@ function makeShowFunction(id) {
 }
 
 function getDailyWord(daily_number) {
-    let index;
-    // phase out random daily word selection to get rid of the possibility of collisions
-    // instead cycle through the secret words, but in a different order than NYT
+    // Cycle through the secret words, but in a different order than NYT
     // Just choose random step width coprime to 2309
     let p1 = 656
     let p2 = 1012
     let offset = 626
-    index = (offset + daily_number * p1 + Math.floor(daily_number / target_words.length) * p2) % target_words.length
+    let index = (offset + daily_number * p1 + Math.floor(daily_number / target_words.length) * p2) % target_words.length
     return target_words[index]
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    showChangelog();
     window.addEventListener("keydown", event => react(event.key))
     board.createKeyboard(react)
     for (const id of Object.keys(associated_functions)) {
         document.getElementById(id).onclick = associated_functions[id]
         // check which options have been set in the local storage
         if (cookie_storage.hasOwnProperty(id) && localStorage.getItem(cookie_storage[id]) == "true") {
+            console.log(id + ", " + cookie_storage[id] + ", " + localStorage.getItem(cookie_storage[id]))
             associated_functions[id]()
             document.getElementById(id).checked = true
         }
     }
-
     reset()
     target_word = getDailyWord(getDailyNumber())
     checkDailyProgress()

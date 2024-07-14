@@ -306,8 +306,8 @@ a:visited {
     overflow-x: hidden;
     background-color: white;
     font-size: var(--option-menu-font-size);
-    align-items: center;
-    align-content: center;
+    align-items: top;
+    align-content: top;
     text-align: left;
 }
 
