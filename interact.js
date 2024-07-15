@@ -32,7 +32,7 @@ let associated_functions = {
 
 let cookie_storage = {
     "toggle-new-units": "new-units",
-    "toggle-contrast": "high-contrast",
+    "toggle-contrast": "contrast",
     "toggle-darkmode": "darkmode",
 }
 
