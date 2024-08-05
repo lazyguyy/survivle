@@ -11,7 +11,7 @@ Since it is not easy to keep track of all the information that can be derived by
 
 Good luck! Contrary to what you might believe, it is quite difficult to 'fail' Wordle — that is, to take more than six guesses. You can try it [here](https://lazyguyy.github.io/survivle/) and see for yourself.
 
-(My personal record is 9, with some obscene luck) 
+(My personal record is 11, with some obscene luck) 
 
 # Feedback
 

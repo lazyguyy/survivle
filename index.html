@@ -2,19 +2,24 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
     <meta name="google-site-verification" content="nCTj2T7D2yA2_2Uj3sBC3kSOgQjj_VjugKWN194shuM" />
     <link rel="stylesheet" href="style.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/fav/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/fav/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/fav/favicon-16x16.png">
+    <title>Survivle</title>
+    <meta name="description" content="Survivle is like Wordle except you have to try to avoid guessing the secret word for as long as possible. It's more challenging than you might expect!">
     <meta property="description" content="It is like Wordle, except you try to not guess the word.">
     <meta property="og-description" content="It is like Wordle, except you try to not guess the word.">
-    <title>Survivle</title>
 </head>
-<body>
-<div class="overlay" id="help-overlay" onclick="hideHelp()">
-    <div class="overlay-content" onclick="hideHelp()">
-        This is yet another creation inspired by Josh Wardle's fantastic <a href="https://www.powerlanguage.co.uk/wordle/">Wordle</a> and qntm's very cool adversarial version <a href="https://qntm.org/files/absurdle/absurdle.html">Absurdle</a>.<br><br>
+<body class="old-units">
+<div class="overlay" id="help-overlay">
+    <div style="height:2vh;"></div>
+    <div class="overlay-content" id="help-overlay-content">
+        Inspired by Josh Wardle's fantastic <a href="https://www.powerlanguage.co.uk/wordle/">Wordle</a> and qntm's very cool adversarial version <a href="https://qntm.org/files/absurdle/absurdle.html">Absurdle</a>, in Survivle it is your goal to <b>lose</b>!<br><br>
 
-        The game plays just like the original in a (even stricter) hardmode: <b>All</b> revealed information has to be used. However, the goal now is to take as many <b>wrong</b> guesses as possible.<br><br>
+        The game plays just like the original in (an even stricter) hardmode: <b>All</b> revealed information has to be used. However, the goal now is to take as many <b>wrong</b> guesses as possible.<br><br>
 
         Since it is very easy to lose track of the revealed information, the game will let you know what exactly (if anything) is wrong with your current guess. <br><br>
 
@@ -109,9 +114,9 @@
     Once I'm positive that everything is running smoothly, that option will be removed, so please report any visual bugs you may encounter!<hr><br>
 
     If you have any cool ideas on possible features, please let me know. I'm planning on adding local stats tracking and somehow being able to view the remaining word set size (although im not sure how to best add that to the interface).<br><br>
->>>>>>> Stashed changes
 
-        Found a bug? Please report it <a href="https://github.com/lazyguyy/survivle/issues">here</a>.
+    Happy Playing,<br>
+    Jonas
     </div>
 </div>
 <div class="overlay" id="stats-overlay">
@@ -123,14 +128,15 @@
 </div>
 <div class="game">
     <div id="titlebar">
-        <button id="help" class="option-button" title="Show Help" onclick="showHelp()"></button><!--
-        --><button id="restart" class="option-button" title="New (random) Survivle" onclick="newGame()"></button><!--
+        <button id="help" class="option-button invertable" title="Show Help"></button><!--
+        --><button id="restart" class="option-button invertable" title="New (random) Survivle"></button><!--
         --><div class="notifications-wrapper" ><div class="notifications-text" id="notifications"></div></div><!--
-        --><button id="reveal" class="option-button" title="Reveal Secret Word" onclick="showSolution()"></button><!--
-        --><button id="toggle-darkmode" class="option-button" title="Toggle Darkmode"></button>
+        --><button id="reveal" class="option-button invertable" title="Reveal Secret Word"></button><!--
+        --><button id="options" class="option-button invertable" title="Show Options"></button>
     </div>
     <div class="game-area" id="game-area">
         <table class="board" id="board"></table>
+        <button id="share">Share</button>
     </div>
     <div class="keyboard" id="keyboard"></div>
 </div>

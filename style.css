@@ -31,6 +31,9 @@ html, body {
     border: none;
 }
 
+.high-contrast {
+}
+
 .titlebar {
     height: 6vh;
     width: 100vw;
@@ -56,9 +59,13 @@ html, body {
 }
 
 .board {
+    font-weight: bold;
     border-spacing: 0.8vmin;
     display: inline-block;
     padding-top: 0px;
+}
+.new-units .board {
+    border-spacing: 0.3em;
 }
 
 .board td {
@@ -68,6 +75,12 @@ html, body {
     width: var(--game-cell-width);
     text-align: center;
     font-size: var(--game-cell-fontsize);
+}
+
+.new-units .board td {
+    height: var(--game-cell-width-new);
+    width: var(--game-cell-width-new);
+    font-size: var(--game-cell-fontsize-new);
 }
 
 .darkmode .board td {
@@ -98,6 +111,14 @@ html, body {
     background-color: forestgreen;
 }
 
+.high-contrast .yellow {
+    background-color: var(--high-contrast-yellow);
+}
+
+.high-contrast .green {
+    background-color: var(--high-contrast-green);
+}
+
 .game {
     text-align: center;
     width: 100vw;
@@ -122,14 +143,27 @@ html, body {
     border-style: solid;
     color: black;
     display:  inline-flex;
-    padding: 0.8em 0.7em;
+    padding: var(--keyboard-letter-size) calc(2*var(--keyboard-letter-size)/3);
     width: var(--key-width);
     height: var(--key-height);
-    margin: 0.05em;
+    margin: calc(0.05 * var(--keyboard-letter-size));
     justify-content: center;
     align-items: center;
-    font-size: min(3.5vh, 6vw);
+    font-size: var(--keyboard-letter-size);
 }
+
+./*new-units .keyboard button {
+/*    padding: var(--keyboard-letter-size-new) calc(2*var(--keyboard-letter-size-new)/3);*/
+/*    width: var(--key-width-new);*/
+/*    height: var(--key-height-new);*/
+/*    margin: calc(0.05 * var(--keyboard-letter-size-new));*/
+/*    font-size: var(--keyboard-letter-size-new);*/
+/*}*/
+
+.keyboard .wider {
+    padding: var(--keyboard-letter-size) var(--keyboard-letter-size);
+}
+
 
 .darkmode .keyboard button {
     border-width: 1px;
@@ -150,6 +184,15 @@ html, body {
     background-color: forestgreen;
 }
 
+.high-contrast .keyboard .yellow {
+    background-color: var(--high-contrast-yellow);
+}
+
+.high-contrast .keyboard .green {
+    background-color: var(--high-contrast-green);
+}
+
+
 .option-button {
     border: none;
     width: calc(2*var(--game-cell-width)/5);
@@ -160,14 +203,58 @@ html, body {
     vertical-align: top;
 }
 
+.close-button {
+    float: right;
+    margin-top: 3vh;
+    margin-right: 10vw;
+    width: 6vh;
+    height: 6vh;
+    border: none;
+    background: url( assets/close.svg );
+    background-size: cover;
+
+}
+
+.option-row {
+    width: min(50vh, 100vw);
+    padding-left: calc((100% - min(50vh, 100vw))/2);
+    display: flex;
+    margin: 4vh;
+    font-size: var(--option-menu-font-size);
+}
+
+
+.toggle-button {
+    margin: calc(var(--option-menu-font-size)/13) 1em 0 1em;
+    width: var(--option-menu-font-size);
+    height: var(--option-menu-font-size);
+}
+
 #toggle-darkmode {
     background: url( assets/dark-mode.svg );
+    background-size: cover;
+}
+
+#toggle-contrast {
+    background: url( assets/contrast.svg );
     background-size: cover;
 }
 
 #reveal {
     background: url( assets/reveal.svg );
     background-size: cover;
+}
+
+a:visited {
+    color: blue;
+}
+
+.darkmode a {
+    color: var(--high-contrast-yellow);
+}
+
+.darkmode a:visited {
+    color: var(--high-contrast-yellow);
 }
 
 #help {
@@ -178,6 +265,32 @@ html, body {
 #restart {
     background: url( assets/reload.svg );
     background-size: cover;
+}
+
+#options {
+    background: url( assets/options.svg );
+    background-size: cover;
+}
+
+#share {
+    display: none;
+    width: 50%;
+    color: white;
+    font-size: 3vmin;
+    padding: 1vh;
+    background-color: seagreen;
+    border: none;
+    margin-bottom: 0.5vmin;
+}
+
+.new-units #share {
+    font-size: 1em;
+    padding: 1em;
+    margin-bottom: 0.5em;
+}
+
+#share:active {
+    background-color: lightseagreen;
 }
 
 .inverted {
@@ -193,9 +306,10 @@ html, body {
     left: 0;
     overflow-x: hidden;
     background-color: white;
-    font-size: 4vh;
-    align-items: center;
-    align-content: center;
+    font-size: var(--option-menu-font-size);
+    align-items: top;
+    align-content: top;
+    text-align: left;
 }
 
 .darkmode .overlay {
@@ -206,9 +320,10 @@ html, body {
     display:  inline-block;
     position: relative;
     width: 70%;
-    text-align: center;
-    padding: 5% 15% 0 15%;
-    margin-top: 30px;
+    height: ;
+    text-align: left;
+    padding: 0 15% 0 15%;
+    margin-top: 10px;
 }
 
 .darkmode .overlay-content {
