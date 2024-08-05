@@ -18,9 +18,107 @@
 
         Since it is very easy to lose track of the revealed information, the game will let you know what exactly (if anything) is wrong with your current guess. <br><br>
 
-        Good Luck!<br><br>
+        Good Luck! Winning in Survivle is done by achieving a score of seven or more (because you would have won with six or fewer guesses if this was Wordle). It is more difficult than you might expect.<br><br>
+
+        <hr><br>
+
+        Examples <br><br>
+
+        <table class="board">
+            <tbody>
+                <tr class="board-row">
+                    <td class="green fixed">W</td>
+                    <td>E</td>
+                    <td>A</td>
+                    <td>R</td>
+                    <td>Y</td>
+                </tr>
+            </tbody>
+        </table><br>
+        The letter <b>W</b> is in the word and in the correct spot.<br><br>
+
+        <table class="board">
+            <tbody>
+                <tr class="board-row">
+                    <td>P</td>
+                    <td class="yellow fixed">I</td>
+                    <td>L</td>
+                    <td>L</td>
+                    <td>S</td>
+                </tr>
+            </tbody>
+        </table><br>
+        The letter <b>I</b> is in the word but in a wrong spot.<br><br>
+
+        <table class="board">
+            <tbody>
+                <tr class="board-row">
+                    <td>V</td>
+                    <td>A</td>
+                    <td>G</td>
+                    <td class="gray fixed">U</td>
+                    <td>E</td>
+                </tr>
+            </tbody>
+        </table><br>
+        The letter <b>U</b> is not contained in the word at all.<br><br>
+        <hr><br>
+
+
+        Found a bug? Please report it <a href="https://github.com/lazyguyy/survivle/issues">here</a>.<br>
+        You can also contact me on <a href="https://www.reddit.com/user/lazyguyy/">reddit</a>.
+    </div>
+</div>
+<div class="overlay" id="options-overlay">
+    <div class="overlay-titlebar">
+        <button class="close-button invertable" id="close-options"></button>
+    </div>
+    <div class="overlay-content" id="options-overlay-content">
+        <div class="option-row">
+            <input id="toggle-darkmode" type="checkbox" class="toggle-button invertable" title="Toggle Darkmode">
+            <div class="button-label">Dark Theme</div>
+        </div>
+        <div class="option-row">
+            <input id="toggle-contrast" type="checkbox" class="toggle-button invertable" title="Toggle High Contrast">
+            <div class="button-label">High Contrast</div>
+        </div>
+        <div class="option-row">
+            <input id="toggle-new-units" type="checkbox" class="toggle-button invertable" title="Toggle New Styleshet">
+            <div class="button-label">New Style</div>
+        </div>
+        <div class="option-row" id="show-stats">
+            Show Stats
+        </div>
+        <div class="option-row" id="show-changelog">
+            Show Changelog again
+        </div>
+        <div style="width: 50%; padding-left: 25%;">
+            Yesterday's Daily: <span id="yesterdays-survivle" style="float: right"></span>
+        </div>
+    </div>
+</div>
+<div class="overlay" id="changelog-overlay">
+    <div style="height:2vh;"></div>
+    <div class="overlay-content">
+    Hello! This is a Changelog (Don't worry, this message won't appear often).<br><br>
+
+    I'm currently finding motivation to give Survivle some of the features it deserved years ago.<br>
+
+    Currently I'm trying for a CSS redesign which allows (I hope!) for zooming out (at least on desktop browsers. Dunno how to make pinch zoom out work on mobile). It should be enabled by default, but you can go back to the old design by unchecking "New Style" in the options.<br><bR>
+
+    Once I'm positive that everything is running smoothly, that option will be removed, so please report any visual bugs you may encounter!<hr><br>
+
+    If you have any cool ideas on possible features, please let me know. I'm planning on adding local stats tracking and somehow being able to view the remaining word set size (although im not sure how to best add that to the interface).<br><br>
+>>>>>>> Stashed changes
 
         Found a bug? Please report it <a href="https://github.com/lazyguyy/survivle/issues">here</a>.
+    </div>
+</div>
+<div class="overlay" id="stats-overlay">
+    <div style="height:2vh;"></div>
+    <div class="overlay-content">
+        Statistics
+        <ul class="bar-chart" id="stats-chart"></ul>
     </div>
 </div>
 <div class="game">

@@ -1,9 +1,20 @@
 :root {
     --darkmode-background: #1a1a1a;
     --game-cell-width: min(13vmin, 8vh);
-    --game-cell-fontsize: min(10.5vmin, 5.5vh);
+    --game-cell-width-new: 2em;
+    --game-cell-fontsize: min(8vmin, 3vh);
+    --game-cell-fontsize-new: 1.5em;
     --key-width: min(4vw, 3.5vh);
     --key-height: 7vh;
+    --high-contrast-yellow: #0accf7;
+    --high-contrast-green: darkorange;
+    --option-menu-font-size: min(5vw, 4vh);
+    --option-menu-font-size-new: 1em;
+    --keyboard-letter-size: min(3.5vh, 6vw);
+    --keyboard-letter-size-new: 2em;
+    --bar-label-width: 2em;
+    --bar-label-padding: 15px;
+    --bar-left: calc(var(--bar-label-width) + 2*var(--bar-label-padding));
 }
 
 html, body {
@@ -202,4 +213,41 @@ html, body {
 
 .darkmode .overlay-content {
     background-color: var(--darkmode-background);
+}
+
+.bar-chart {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+}
+
+.bar-chart .chart-item {
+    position: relative;
+    list-style: none;
+}
+
+.bar-chart .chart-item .bar-label {
+    display: inline-block;
+    width: var(--bar-label-width);
+    padding: 15px;
+    text-align: right;
+}
+
+.bar {
+    content: "";
+    position: absolute;
+    top: 25%;
+    left: var(--bar-left);
+    height: 50%;
+    z-index: 2;
+    width: 0;
+    padding:2px;
+    color:transparent;
+}
+
+.overlay.visible .bar {
+    width: calc(100% - var(--bar-left));
+    color: white;
+    background: seagreen;
+    transition: width 1.25s 0.25s ease-out, color 0s 1.5s;
 }
