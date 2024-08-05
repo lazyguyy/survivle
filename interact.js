@@ -274,6 +274,16 @@ function makeShowFunction(id) {
     return () => document.getElementById(id).style.width = "100%"
 }
 
+function getDailyWord(daily_number) {
+    // Cycle through the secret words, but in a different order than NYT
+    // Just choose random step width coprime to 2309
+    let p1 = 656
+    let p2 = 1012
+    let offset = 626
+    let index = (offset + daily_number * p1 + Math.floor(daily_number / target_words.length) * p2) % target_words.length
+    return target_words[index]
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     showChangelog();
     window.addEventListener("keydown", event => react(event.key))
