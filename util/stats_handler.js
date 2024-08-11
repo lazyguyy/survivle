@@ -15,17 +15,19 @@ class StatsHandler {
         } else {
             values = JSON.parse(values)
         }
+        this.values = values;
         this.bar_chart = new BarChart(root_element, [...values.keys()].map(x => x+1), values)
     }
 
     updateResults(turns_taken) {
-        while (values.length < turns_taken) {
-            values.push(0);
-            this.bar_chart.updateValue(values.length, 0)
+        console.log("Adding Result: ", turns_taken);
+        while (this.values.length < turns_taken) {
+            this.values.push(0);
+            this.bar_chart.updateValue(this.values.length, 0)
         }
-        values[turns_taken - 1] += 1;
-        localStorage.setItem(this.storage_name, JSON.stringify(values));
-        this.bar_chart.updateValue(turns_taken, values[turns_taken - 1]);
+        this.values[turns_taken - 1] += 1;
+        localStorage.setItem(this.storage_name, JSON.stringify(this.values));
+        this.bar_chart.updateValue(turns_taken, this.values[turns_taken - 1]);
     }
 }
 

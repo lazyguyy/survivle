@@ -27,10 +27,10 @@ let associated_functions = {
     "toggle-contrast": toggleContrast,
     "toggle-new-units": toggleNewUnits,
     "toggle-darkmode": toggleDarkmode,
-    "show-changelog": function() {makeHideFunction("options-overlay")();makeShowFunction("changelog-overlay")();},
+    "show-changelog": function() {document.getElementById("options-overlay").style.width = "0%";document.getElementById("changelog-overlay").style.width = "100%";makeHideFunction("options-overlay")();makeShowFunction("changelog-overlay")();},
     "changelog-overlay": makeHideFunction("changelog-overlay"),
-    "show-stats": makeShowFunction("stats-overlay"),
-    "stats-overlay": makeHideFunction("stats-overlay"),
+    "show-stats": function() {makeShowFunction("stats-overlay")();document.getElementById("stats-overlay").classList.add("visible");},
+    "stats-overlay": function() {makeHideFunction("stats-overlay")();document.getElementById("stats-overlay").classList.remove("visible");},
 }
 
 let cookie_storage = {
@@ -175,6 +175,7 @@ function submitWord(word, writeToCache=true) {
         board.setNotificationText(result.message)
         document.getElementById("share").style.display="inline-block"
         board.scrollToBottom()
+        stats_handler.updateResults(judge.history.length)
         return
     }
     board.createNewRow()
@@ -286,13 +287,14 @@ function getDailyWord(daily_number) {
 
 document.addEventListener("DOMContentLoaded", () => {
     showChangelog();
+    stats_handler = new StatsHandler(document.getElementById("stats-chart"))
+    console.log(stats_handler)
     window.addEventListener("keydown", event => react(event.key))
     board.createKeyboard(react)
     for (const id of Object.keys(associated_functions)) {
         document.getElementById(id).onclick = associated_functions[id]
         // check which options have been set in the local storage
         if (cookie_storage.hasOwnProperty(id) && localStorage.getItem(cookie_storage[id]) == "true") {
-            console.log(id + ", " + cookie_storage[id] + ", " + localStorage.getItem(cookie_storage[id]))
             associated_functions[id]()
             document.getElementById(id).checked = true
         }

@@ -331,6 +331,7 @@ a:visited {
 }
 
 .bar-chart {
+    border: 1px solid white;
     display: flex;
     flex-direction: column;
     padding-left: 0;
@@ -346,9 +347,11 @@ a:visited {
     width: var(--bar-label-width);
     padding: 15px;
     text-align: right;
+    border: 1px solid white;
 }
 
 .bar {
+    border: 1px solid white;
     content: "";
     position: absolute;
     top: 25%;
@@ -358,6 +361,7 @@ a:visited {
     width: 0;
     padding:2px;
     color:transparent;
+    text-align: right;
 }
 
 .overlay.visible .bar {
