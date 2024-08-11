@@ -54,7 +54,10 @@ let version = "1.0.1" // important for changelog notice
 let stats_handler;
 
 function getDailyNumber() {
-    return Math.floor((new Date() - start_date) / (1000 * 60 * 60 * 24))
+    let start_date_utc = Date.UTC(start_date.getFullYear(), start_date.getMonth(), start_date.getDate())
+    let current_date = new Date()
+    let current_date_utc = Date.UTC(current_date.getFullYear(), current_date.getMonth(), current_date.getDate())
+    return (current_date_utc - start_date_utc) / (1000 * 60 * 60 * 24)
 }
 
 function reveal() {
