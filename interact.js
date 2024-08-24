@@ -29,7 +29,7 @@ let associated_functions = {
     "toggle-darkmode": toggleDarkmode,
     "show-changelog": function() {document.getElementById("options-overlay").style.width = "0%";document.getElementById("changelog-overlay").style.width = "100%";makeHideFunction("options-overlay")();makeShowFunction("changelog-overlay")();},
     "changelog-overlay": makeHideFunction("changelog-overlay"),
-    "show-stats": function() {makeShowFunction("stats-overlay")();document.getElementById("stats-overlay").classList.add("visible");},
+    "show-stats": function() {document.getElementById("options-overlay").style.width = "0%";makeShowFunction("stats-overlay")();document.getElementById("stats-overlay").classList.add("visible");},
     "stats-overlay": function() {makeHideFunction("stats-overlay")();document.getElementById("stats-overlay").classList.remove("visible");},
 }
 
@@ -50,7 +50,8 @@ let solved = false
 let solving_daily = true
 let start_date = new Date("Mar 05 2022")
 let daily_number = getDailyNumber()
-let version = "1.0.1" // important for changelog notice
+let version = "1.0.2" // important for changelog notice
+let initialized = false
 let stats_handler;
 
 function getDailyNumber() {
@@ -178,7 +179,10 @@ function submitWord(word, writeToCache=true) {
         board.setNotificationText(result.message)
         document.getElementById("share").style.display="inline-block"
         board.scrollToBottom()
-        stats_handler.updateResults(judge.history.length)
+        if (initialized && solving_daily) {
+            stats_handler.updateResults(judge.history.length)
+            associated_functions["show-stats"]();
+        }
         return
     }
     board.createNewRow()
@@ -263,9 +267,6 @@ function showChangelog() {
     if (localStorage.getItem("last_changelog") != version) {
         document.getElementById("changelog-overlay").style.width = "100%";
         localStorage.setItem("last_changelog", version);
-
-        // Special Behaviour only for this changelog function
-        localStorage.setItem("new-units", true)
     }
 }
 function makeHideFunction(id) {
@@ -290,7 +291,7 @@ function getDailyWord(daily_number) {
 
 document.addEventListener("DOMContentLoaded", () => {
     showChangelog();
-    stats_handler = new StatsHandler(document.getElementById("stats-chart"))
+    stats_handler = new StatsHandler(document.getElementById("stats-chart"), document.getElementById("stats-summary"));
     console.log(stats_handler)
     window.addEventListener("keydown", event => react(event.key))
     board.createKeyboard(react)
@@ -306,4 +307,5 @@ document.addEventListener("DOMContentLoaded", () => {
     target_word = getDailyWord(getDailyNumber())
     checkDailyProgress()
     solving_daily = true
+    initialized = true
 })
