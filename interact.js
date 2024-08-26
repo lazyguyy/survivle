@@ -126,12 +126,12 @@ function share() {
     }
     let old_text = board.getNotificationText()
     board.setNotificationText("Copied to Clipboard")
-    postTextAfterDelay(1000, old_text)
+    delayFunctionCall(1000, () => {board.setNotificationText(old_text)})
 }
 
-async function postTextAfterDelay(delay, text) {
+async function delayFunctionCall(delay, func) {
     await util.delay(1000)
-    board.setNotificationText(text)
+    func();
 }
 
 function onEnter(word, hints) {
@@ -181,7 +181,7 @@ function submitWord(word, writeToCache=true) {
         board.scrollToBottom()
         if (initialized && solving_daily) {
             stats_handler.updateResults(judge.history.length)
-            associated_functions["show-stats"]();
+            delayFunctionCall(1500, associated_functions["show-stats"])
         }
         return
     }
