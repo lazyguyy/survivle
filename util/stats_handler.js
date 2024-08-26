@@ -39,6 +39,7 @@ class StatsHandler {
             this.bar_chart.updateValue(this.values.length, 0)
         }
         this.values[turns_taken - 1] += 1;
+        console.log(this.values);
         localStorage.setItem(this.storage_name, JSON.stringify(this.values));
         this.updateUIStats();
         this.bar_chart.updateValue(turns_taken, this.values[turns_taken - 1]);
@@ -51,7 +52,7 @@ class BarChart{
     constructor(root_element, labels=[], values=[]) {
         this.root = root_element;
         this.labels = labels;
-        this.values = values;
+        this.values = [...values];
         this.max_bar_length = 1;
         this.createBars()
     }
@@ -64,11 +65,14 @@ class BarChart{
     }
 
     updateValue(label_name, new_value) {
+        console.log(this.labels)
+        console.log(label_name)
         if (label_name in this.label_mapping) {
             let label_index = this.label_mapping[label_name]
             this.values[label_index] = new_value;
             this.updateHtml(label_index)
         } else {
+            this.label_mapping[label_name] = this.labels.length
             this.labels.push(label_name);
             this.values.push(new_value);
             var bar_percent = this.max_value == 0 ? 0 : (new_value * 100 / this.max_value) * this.max_bar_length;
